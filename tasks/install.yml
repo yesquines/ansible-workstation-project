@@ -1,0 +1,25 @@
+- name: Ensure Repository 
+  apt-repository:
+    repo: "{{ item }}"
+    state: present
+  loop: REPOSITORY
+
+- name: Import Keys
+  apt-key:
+    url: "{{ item }}"
+    state: present
+  loop: KEYS
+
+- name: Install Dependencies
+  package:
+    name: "{{ DEPENDENCIES }}"
+
+- name: Install Packages
+  package:
+    name: "{{ PACKAGES }}"
+    state: present
+     
+- name: Install Deb Packages
+  apt:
+   deb: "{{ item }}"
+  loop: DEB-PACKAGES
