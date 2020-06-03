@@ -1,0 +1,102 @@
+---
+# defaults file for nightwing
+REPOSITORY:
+  - "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
+  - "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+  - "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+  - "deb [arch=amd64] https://repo.fortinet.com/repo/ubuntu/ /bionic multiverse"
+  - "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"
+  - "deb http://deb.debian.org/debian/ buster main contrib non-free"
+  - "deb http://repository.spotify.com stable non-free"
+  - "deb https://dbeaver.io/debs/dbeaver-ce /" 
+
+KEYS:
+  - "https://dbeaver.io/debs/dbeaver.gpg.key"
+  - "https://dl.google.com/linux/linux_signing_key.pub"
+  - "https://download.docker.com/linux/debian/gpg"
+  - "https://download.spotify.com/debian/pubkey.gpg"
+  - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+  - "https://repo.fortinet.com/repo/ubuntu/DEB-GPG-KEY"
+  - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+
+DEPENDENCIES:
+  - apt-transport-https
+  - aspell-pt-br
+  - bash-completion
+  - buster-backports
+  - ca-certificates
+  - curl
+  - ffmpeg
+  - gdebi
+  - gnome-tweaks-tool
+  - gnupg
+  - gnupg-agent
+  - hunspell-pt-br
+  - mariadb-client
+  - myspell-pt-br
+  - network-manager-openvpn
+  - network-manager-openvpn-gnome
+  - nmap
+  - openjdk-11-jdk
+  - openjdk-11-jre
+  - openjdk-8-jdk
+  - openjdk-8-jre
+  - openssh-client
+  - openssh-server
+  - openvpn
+  - powerline
+  - python
+  - python3
+  - shotwell
+  - shutter
+  - software-properties-common
+  - sshfs
+  - sshpass
+  - sshuttle
+  - tree
+  - unzip
+  - vim
+  - wget
+  - zip
+
+PACKAGES:
+  - audacity
+  - awscli
+  - containerd.io
+  - dbeaver-ce
+  - docker-ce 
+  - docker-ce-cli 
+  - filezilla
+  - forticlient
+  - gimp
+  - google-chrome-stable
+  - google-cloud-sdk
+  - keepassxc
+  - libreoffice
+  - obs-studio
+  - postgresql-client
+  - spotify
+  - steam
+  - tilix
+  - transmission
+  - virtualbox-dkms
+  - virtualbox-ext-pack
+  - virtualbox-guest-additions-iso
+  - virtualbox-guest-dkms
+  - virtualbox-guest-utils
+  - virtualbox-qt
+  - "virtualbox-{{ virtualbox-latest }}"
+  - vlc
+ 
+
+DEB-PACKAGES:
+  - "https://download.teamviewer.com/download/linux/teamviewer_amd64.deb"
+  - "https://github.com/atom/atom/releases/download/{{ atom-latest }}/atom-amd64.deb"
+  - "https://github.com/getferdi/ferdi/releases/download/v{{ ferdi-latest }}/ferdi_{{ ferdi-latest }}_amd64.deb"
+  - "https://go.skype.com/skypeforlinux-64.deb"
+  - "https://zoom.us/client/latest/zoom_amd64.deb"
+
+#Versions
+atom-latest: "v1.47.0"
+ferdi-latest: "5.5.0"
+virtualbox-latest: "6.1"
