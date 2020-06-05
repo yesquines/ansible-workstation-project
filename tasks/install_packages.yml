@@ -1,25 +1,98 @@
-- name: Ensure Repository 
-  apt-repository:
-    repo: "{{ item }}"
-    state: present
-  loop: REPOSITORY
+- name: DPKG - Add Architecture
+  block:
+    - name: DPKG - Check Architecture
+      slurp:
+        src: /var/lib/dpkg/arch
+      register: CHECK_ARCHITECTURE
+    - name: DPKG - Check Architecture
+      fail:
+        msg: Needs add Architecture i386
+      when: CHECK_ARCHITECTURE.content | b64decode != "amd64\ni386\n"
+  rescue:
+    - name: DPKG - Add Architecture i386
+      command: dpkg --add-architecture i386
 
-- name: Import Keys
-  apt-key:
+- name: Import Keys - URL
+  apt_key:
     url: "{{ item }}"
     state: present
-  loop: KEYS
+  loop: "{{ KEYS }}"
+
+- name: Import Keys - KEYSERVER
+  apt_key:
+    keyserver: "{{ item.keyserver }}"
+    id: "{{ item.id }}"
+    state: present
+  loop: "{{ KEYS_SERVER }}"
+
+- name: Ensure Default Debian Repository
+  lineinfile:
+    path: /etc/apt/sources.list
+    regexp: deb\s+http://deb.debian.org/debian/\s+buster\s+.*
+    line: "{{ DEBIAN_REPOSITORY }}"
+    state: present
+
+- name: Ensure Repository 
+  apt_repository:
+    repo: "{{ item.repo }}"
+    filename: "{{ item.name }}"
+    state: present
+  loop: "{{ REPOSITORY }}"
 
 - name: Install Dependencies
   package:
     name: "{{ DEPENDENCIES }}"
+    state: present 
 
 - name: Install Packages
-  package:
+  apt:
     name: "{{ PACKAGES }}"
+    update-cache: yes
     state: present
      
 - name: Install Deb Packages
   apt:
    deb: "{{ item }}"
-  loop: DEB-PACKAGES
+  loop: "{{ DEB_PACKAGES }}"
+
+- name: Install Compress Packages
+  block:
+    - name: Ensure Packages Directories
+      file:
+        path: "{{ item.path }}"
+        mode: 0755
+        state: directory
+      loop: "{{ COMPRESS_PACKAGES }}"
+    - name: Install Compress Packages
+      unarchive:
+        src: "{{ item.url }}"
+        dest: "{{ item.path }}"
+        remote_src: yes
+      loop: "{{ COMPRESS_PACKAGES }}"
+
+- name: Install Compress Binaries
+  block:
+    - name: Descompress Binaries
+      unarchive: 
+        src: "{{ item }}"
+        dest: /tmp/
+        exclude: ['kubectl','LICENSE','README.md','README.adoc']
+        mode: 0755
+        list_files: yes
+        remote_src: yes
+      loop: "{{ COMPRESS_BINARIES }}"
+      register: decompress
+    - name: Copy Binaries to "{{ BINARIES_PATH }}"
+      copy:
+        src: "/tmp/{{ item }}"
+        dest: "{{ BINARIES_PATH }}"
+        remote_src: yes
+      loop: "{{ decompress | json_query('results[*].files[0]') }}"
+
+- name: Install Binaries Packages
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.path }}"
+    mode: 0755
+  loop: "{{ BINARIES_PACKAGES }}"
+    
