@@ -1,2 +1,16 @@
 ---
 # tasks file for nightwing
+- name: Check OS
+  fail:
+    msg: "ROLE RUN JUST IN DEBIAN 10.X SYSTEM"
+  when:
+  - ansible_os_family != "Debian"
+  - ansible_distribuition_major_version is version_compare('10','!=')
+
+- name: Package Instalation
+  block:
+    - name: Install - Include Vars
+      include_vars: vars-install.yml
+    - name: Install Packages
+      include: install_packages.yml 
+  tags: install
