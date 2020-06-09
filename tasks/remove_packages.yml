@@ -1,0 +1,13 @@
+- name: Remove Packages
+  apt:
+    name: "{{ REMOVE_PACKAGES }}"
+    purge: yes
+    state: absent
+
+- name: Remove Unless Dependencies
+  apt:
+    autoremove: yes
+
+- name: Clean Cache Packages
+  apt:
+    autoclean: yes

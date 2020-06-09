@@ -1,0 +1,22 @@
+REMOVE_GRAPHICAL_PACKAGES:
+  - evolution
+  - gnome*
+  - hicolor-icon-theme
+  - mailutils
+  - mdadm
+  - seahorse
+  - simple-scan 
+  - sleuthkit
+  - speech-dispatcher
+
+REMOVE_PACKAGES:
+  - brasero-common
+  - cheese
+  - fonts-dejavu-core
+  - fonts-droid-fallback
+  - fonts-sil-gentium
+  - fonts-sil-gentium-basic
+  - gnome-keyring-pkcs11
+  - gnome-user-docs
+  - gnome-user-share
+  - konqueror
