@@ -55,6 +55,12 @@
     update-cache: yes
     state: present
      
+- name: Install Funny Packages :D
+  apt:
+    name: "{{ FUNNY_PACKAGES }}"
+    update-cache: yes
+    state: present
+
 - name: Install Deb Packages
   apt:
    deb: "{{ item }}"

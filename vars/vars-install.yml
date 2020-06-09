@@ -11,6 +11,7 @@ REPOSITORY:
   - { repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib", name: "virtualbox" }
   - { repo: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main", name: "ansible"}
   - { repo: "deb http://ppa.launchpad.net/tsbarnes/indicator-keylock/ubuntu bionic main", name: "tsbarnes-indicator-keylock" }
+  - { repo: "deb http://ppa.launchpad.net/ytvwld/asciiquarium/ubuntu focal main", name: "asciiquarium" }
   - { repo: "deb http://repository.spotify.com stable non-free", name: "spotify"}
   - { repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main", name: "kubernetes"}
   - { repo: "deb https://dbeaver.io/debs/dbeaver-ce /", name: "dbeaver"}
@@ -27,6 +28,7 @@ KEYS:
 KEYS_SERVER:
   - {keyserver: keyserver.ubuntu.com, id: 7384429d471e4486} #Indicator-keylock Key
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
+  - {keyserver: keyserver.ubuntu.com, id: F3985DE9980B9063} #ASCIIQuarium Key 
 
 
 GNOME_PACKAGES:
@@ -135,7 +137,6 @@ PACKAGES:
   - gimp
   - google-chrome-stable
   - google-cloud-sdk
-  - indicator-keylock
   - jmeter
   - keepassxc
   - kubectl
@@ -148,7 +149,6 @@ PACKAGES:
   - postgresql-client
   - privoxy
   - python3-pip
-  - spotify-client
   - ssg-applications
   - ssg-base 
   - ssg-debderived 
@@ -158,10 +158,13 @@ PACKAGES:
   - tor
   - transmission
   - vlc
- #- steam
  #- virtualbox-guest-additions-iso # virtualbox-guest-dkms, virtualbox-guest-utils, virtualbox-ext-pack, virtualbox-dkms, virtualbox-qt
  #- "virtualbox-{{ virtualbox_latest }}"
  
+FUNNY_PACKAGES: ['cmatrix','hollywood','figlet','cowsay','cowsay-off','fortunes-br','elinks','lolcat','jstest-gtk','qjoypad','spotify-client','nsnake','asciiquarium']
+# steam
+# indicator-keylock
+
 DEB_PACKAGES:
   - "https://download.teamviewer.com/download/linux/teamviewer_amd64.deb"
   - "https://github.com/atom/atom/releases/download/{{ atom_latest }}/atom-amd64.deb"
