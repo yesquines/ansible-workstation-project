@@ -28,6 +28,57 @@ KEYS_SERVER:
   - {keyserver: keyserver.ubuntu.com, id: 7384429d471e4486} #Indicator-keylock Key
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
 
+
+GNOME_PACKAGES:
+  - adwaita-icon-theme
+  - baobab
+  - caribou 
+  - dconf-cli 
+  - dconf-gsettings-backend
+  - eog 
+  - ethtool
+  - evince
+  - firefox-esr
+  - firefox-esr-l10n-pt-br
+  - fonts-cantarell 
+  - gdm3 
+  - gedit 
+  - gkbd-capplet
+  - glib-networking 
+  - gnome-bluetooth 
+  - gnome-calculator
+  - gnome-control-center
+  - gnome-disk-utility
+  - gnome-menus
+  - gnome-online-accounts
+  - gnome-session
+  - gnome-settings-daemon
+  - gnome-shell
+  - gnome-shell-extensions
+  - gnome-sushi
+  - gnome-system-monitor
+  - gnome-terminal
+  - gnome-tweaks
+  - gsettings-desktop-schemas
+  - gstreamer1.0-packagekit
+  - gstreamer1.0-plugins-base
+  - gstreamer1.0-plugins-good
+  - gstreamer1.0-pulseaudio 
+  - gvfs-backends
+  - gvfs-bin
+  - gvfs-fuse
+  - libcanberra-pulse
+  - libproxy1-plugin-gsettings
+  - nautilus
+  - network-manager-openvpn
+  - network-manager-openvpn-gnome
+  - pulseaudio
+  - sound-theme-freedesktop
+  - system-config-printer-common
+  - system-config-printer-udev
+  - totem
+  - zenity
+
 DEPENDENCIES:
   - apt-transport-https
   - aptitude
@@ -37,12 +88,9 @@ DEPENDENCIES:
   - curl
   - dnsutils
   - ffmpeg
-  - firefox-esr
-  - firefox-esr-l10n-pt-br
   - flameshot # Alternative to shutter
   - gdebi
   - git
-  - gnome-tweaks
   - gnupg
   - gnupg-agent
   - htop
@@ -52,8 +100,6 @@ DEPENDENCIES:
   - libvirt-daemon-system
   - mariadb-client
   - myspell-pt-br
-  - network-manager-openvpn
-  - network-manager-openvpn-gnome
   - nmap
   - openjdk-11-jdk
   - openjdk-11-jre
