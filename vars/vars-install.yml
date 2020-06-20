@@ -10,7 +10,6 @@ REPOSITORY:
   - { repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable", name: "docker" }
   - { repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib", name: "virtualbox" }
   - { repo: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main", name: "ansible"}
-  - { repo: "deb http://ppa.launchpad.net/tsbarnes/indicator-keylock/ubuntu bionic main", name: "tsbarnes-indicator-keylock" }
   - { repo: "deb http://ppa.launchpad.net/ytvwld/asciiquarium/ubuntu focal main", name: "asciiquarium" }
   - { repo: "deb http://repository.spotify.com stable non-free", name: "spotify"}
   - { repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main", name: "kubernetes"}
@@ -26,7 +25,6 @@ KEYS:
   - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
 
 KEYS_SERVER:
-  - {keyserver: keyserver.ubuntu.com, id: 7384429d471e4486} #Indicator-keylock Key
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
   - {keyserver: keyserver.ubuntu.com, id: F3985DE9980B9063} #ASCIIQuarium Key 
 
@@ -90,7 +88,6 @@ DEPENDENCIES:
   - curl
   - dnsutils
   - ffmpeg
-  - flameshot # Alternative to shutter
   - gdebi
   - git
   - gnupg
@@ -110,6 +107,7 @@ DEPENDENCIES:
   - openvpn
   - powerline
   - python
+  - python-psutil
   - python3
   - shotwell
   - software-properties-common
@@ -120,6 +118,7 @@ DEPENDENCIES:
   - unzip
   - vagrant-libvirt 
   - vim
+  - vim-gtk3
   - virt-viewer
   - wget
   - zip
@@ -163,12 +162,14 @@ PACKAGES:
  
 FUNNY_PACKAGES: ['cmatrix','hollywood','figlet','cowsay','cowsay-off','fortunes-br','elinks','lolcat','jstest-gtk','qjoypad','spotify-client','nsnake','asciiquarium']
 # steam
-# indicator-keylock
+
 
 DEB_PACKAGES:
   - "https://download.teamviewer.com/download/linux/teamviewer_amd64.deb"
+  - "https://github.com/Automattic/simplenote-electron/releases/download/v{{ simplenote_latest }}/Simplenote-linux-{{ simplenote_latest }}-amd64.deb"
   - "https://github.com/atom/atom/releases/download/{{ atom_latest }}/atom-amd64.deb"
   - "https://github.com/getferdi/ferdi/releases/download/v{{ ferdi_latest }}/ferdi_{{ ferdi_latest }}_amd64.deb"
+  - "https://github.com/ksnip/ksnip/releases/download/v{{ ksnip_latest }}/ksnip-{{ ksnip_latest }}.deb"
   - "https://go.skype.com/skypeforlinux-64.deb"
   - "https://hadler.me/files/forticlient-sslvpn_{{ forticlient_latest }}_amd64.deb"
   - "https://releases.hashicorp.com/vagrant/{{ vagrant_latest }}/vagrant_{{ vagrant_latest }}_x86_64.deb"
@@ -196,9 +197,11 @@ atom_latest: "v1.47.0"
 dockermachine_latest: "0.16.2"
 ferdi_latest: "5.5.0"
 forticlient_latest: "4.4.2333-1"
+ksnip_latest: "1.7.0"
 minishift_latest: "1.34.2"
 openshift_latest: "3.11.0"
 popcorn_latest: "0.4.4"
+simplenote_latest: "1.17.0"
 terraform_latest: "0.12.26"
 vagrant_latest: "2.2.9"
 virtualbox_latest: "6.1"
