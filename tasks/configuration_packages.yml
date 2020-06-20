@@ -1,0 +1,54 @@
+- name: Create Directories
+  file:
+    path: "{{ item.path }}"
+    mode: "{{ item.mode }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    state: directory
+  loop: "{{ DIRETORIES }}"
+
+- name: VIM Configuration
+  copy:
+    src: "{{ role_path }}/files/vimrc"
+    dest: /etc/vim/vimrc
+    backup: yes
+    mode: '644'
+    owner: root
+    group: root
+
+- name: SSH Configuration (Private Key and Config File)
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '600'
+    owner: root
+    group: root
+  loop: "{{ SSH_FILES }}"
+
+- name: Tilix Configuration - Defautl Terminal
+  alternatives:
+    name: x-terminal-emulator
+    path: /usr/bin/tilix.wrapper
+
+- name: Tilix Configuration
+  block:
+    - name: Tilix Configuration - ROOT
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+        state: present
+      loop: "{{ TILIX_CONFIGURATION_ROOT }}"
+    - name: Tilix Configuration - PROFILE
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+        state: present
+      loop: "{{ TILIX_CONFIGURATION_PROFILE }}"
+    - name: Tilix Configuration - KEYBINDINGS
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+        state: present
+      loop: "{{ TILIX_CONFIGURATION_KEYBINDINGS }}"
+  become: yes
+  become_user: "{{ COMMON_USER }}"

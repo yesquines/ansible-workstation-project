@@ -1,0 +1,93 @@
+COMMON_USER: yago
+
+DIRETORIES:
+  - {path: /root/.ssh/, mode: 750, owner: root, group: root }
+
+SSH_FILES:
+  - {src: "{{ role_path }}/files/id_rsa", dest: "/root/.ssh/id_rsa"}
+  - {src: "{{ role_path }}/files/config", dest: "/root/.ssh/config"}
+
+#Get Tilix Configuration run 'dconf dump /com/gexperts/Tilix/ > tilix.dconf'
+TILIX_CONFIGURATION_ROOT:
+  - {key: "/com/gexperts/Tilix/new-window-inherit-state", value: "true" }
+  - {key: "/com/gexperts/Tilix/prompt-on-close", value: "true" }
+  - {key: "/com/gexperts/Tilix/window-style", value: "'normal'" }
+  - {key: "/com/gexperts/Tilix/middle-click-close", value: "false" }
+  - {key: "/com/gexperts/Tilix/quake-active-monitor", value: "true" }
+  - {key: "/com/gexperts/Tilix/quake-hide-lose-focus", value: "false" }
+  - {key: "/com/gexperts/Tilix/copy-on-select", value: "true" }
+  - {key: "/com/gexperts/Tilix/sidebar-on-right", value: "false" }
+  - {key: "/com/gexperts/Tilix/terminal-title-style", value: "'small'"}
+  - {key: "/com/gexperts/Tilix/window-state", value: "43780" }
+  - {key: "/com/gexperts/Tilix/tab-position", value: "'top'"}
+  - {key: "/com/gexperts/Tilix/theme-variant", value: "'dark'" }
+  - {key: "/com/gexperts/Tilix/use-tabs", value: "true" }
+  - {key: "/com/gexperts/Tilix/paste-advanced-default", value: "false" }
+  - {key: "/com/gexperts/Tilix/control-scroll-zoom", value: "true" }
+  - {key: "/com/gexperts/Tilix/quake-hide-headerbar", value: "false" }
+  - {key: "/com/gexperts/Tilix/enable-wide-handle", value: "true" }
+  - {key: "/com/gexperts/Tilix/app-title", value: "'${appName} ${sessionNumber}: ${sessionName}'"}
+  - {key: "/com/gexperts/Tilix/quake-show-on-all-workspaces", value: "true" }
+  - {key: "/com/gexperts/Tilix/window-save-state", value: "false" }
+  - {key: "/com/gexperts/Tilix/prompt-on-delete-profile", value: "true" }
+  - {key: "/com/gexperts/Tilix/warn-vte-config-issue", value: "false" }
+  - {key: "/com/gexperts/Tilix/focus-follow-mouse", value: "true" }
+  - {key: "/com/gexperts/Tilix/control-click-titlebar", value: "false" }
+  - {key: "/com/gexperts/Tilix/terminal-title-show-when-single", value: "true" }
+
+TILIX_PROFILE: "2b7c4080-0ddd-46c5-8f23-563fd3ba789d" #Get the profile run `dconf list /com/gexperts/Tilix/profiles/`
+TILIX_CONFIGURATION_PROFILE:
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/dim-transparency-percent", value: "0"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/foreground-color", value: "'#FFFFFFFFFFFF'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/rewrap-on-resize", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/use-system-font", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/login-shell", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/palette", value: "['#000000', '#EFEF29292929', '#00AA00', '#AA5400', '#0000AA', '#AA0    0AA', '#00AAAA', '#AAAAAA', '#555557575353', '#FF5454', '#54FF54', '#FFFF54    ', '#5454FF', '#FF54FF', '#54FFFF', '#FFFFFF']" }
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/bold-is-bright", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/visible-name", value: "'Padrão'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-color-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/default-size-columns", value: "100"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/default-size-rows", value: "35"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/cursor-shape", value: "'block'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/cursor-colors-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/highlight-colors-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-position", value: "'northeast'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/bold-color-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/font", value: "'Courier 10 Pitch Bold 12'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/use-theme-colors", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scrollback-unlimited", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scroll-on-output", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/notify-silence-threshold", value: "0"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/cursor-blink-mode", value: "'system'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/background-color", value: "'#000000000000'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/background-transparency-percent", value: "6"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-text", value: "''"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scrollback-lines", value: "10000"}
+
+TILIX_CONFIGURATION_KEYBINDINGS:
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-8", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-9", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-synchronize-input", value: "'<Primary><Alt>s'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-1", value: "'<Alt>1'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-2", value: "'<Alt>2'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-5", value: "'<Alt>5'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-add-down", value: "'<Primary><Alt>d'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-4", value: "'<Alt>4'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-8", value: "'<Alt>8'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-6", value: "'<Alt>6'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-3", value: "'<Alt>3'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-right", value: "'<Alt>Right'"}
+  - {key: "/com/gexperts/Tilix/keybindings/terminal-title-style", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-7", value: "'<Alt>7'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-name", value: "'F2'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-9", value: "'<Alt>9'"}
+  - {key: "/com/gexperts/Tilix/keybindings/terminal-read-only", value: "'<Primary><Alt>l'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-0", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-1", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-2", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-3", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-4", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-5", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-6", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-7", value: "'disabled'"}
+  - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-0", value: "'<Alt>0'"}

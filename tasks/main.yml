@@ -33,3 +33,11 @@
     - name: Remove Packages
       include: remove_packages.yml 
   tags: remove
+
+- name: Package Configuration
+  block:
+    - name: Configuration - Include Vars
+      include_vars: vars-configuration.yml
+    - name: Configure Packages
+      include: configuration_packages.yml 
+  tags: configuration
