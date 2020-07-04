@@ -73,6 +73,34 @@
         backup: yes
         owner: "{{ COMMON_USER }}"
         group: "{{ COMMON_USER }}"
-        mode: 0664
+        mode: '664'
+  become: yes
+  become_user: "{{ COMMON_USER }}"
+
+- name: Ferdi Configuration
+  synchronize:
+    src: "{{ role_path }}/files/ferdi/"
+    dest: "/home/{{ COMMON_USER }}/.config/Ferdi/"
+    owner: yes
+    group: yes
+    recursive: yes
+  become: yes
+  become_user: "{{ COMMON_USER }}"
+
+- name: Firefox Configuration
+  block:
+    - name: Firefox Configuration - Check Profile
+      stat:
+        path: "/home/{{ COMMON_USER }}/.mozilla/firefox/default"
+      register: check_firefox_profile
+    - name: Firefox Configuration - Create Profile
+      shell: "firefox -CreateProfile 'default /home/{{ COMMON_USER }}/.mozilla/firefox/default' --display=:0"
+      when: check_firefox_profile.stat.exists == False
+    - name: Firefox Configuration - Profile Files
+      synchronize:
+        src: "{{ role_path }}/files/firefox/"
+        dest: "/home/{{ COMMON_USER }}/.mozilla/firefox/"
+        perms: yes
+        recursive: yes
   become: yes
   become_user: "{{ COMMON_USER }}"

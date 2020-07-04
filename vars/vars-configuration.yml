@@ -1,7 +1,8 @@
 COMMON_USER: yago
 
 DIRETORIES:
-  - {path: /root/.ssh/, mode: '750', owner: root, group: root }
+  - {path: "/root/.ssh/", mode: '750', owner: root, group: root }
+  - {path: "/home/{{ COMMON_USER }}/.mozilla/firefox", mode: '700', owner: "{{ COMMON_USER }}", group: "{{ COMMON_USER }}" }
 
 SSH_FILES:
   - {src: "{{ role_path }}/files/ssh/id_rsa", dest: "/root/.ssh/id_rsa"}
