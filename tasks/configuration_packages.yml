@@ -16,7 +16,7 @@
     owner: root
     group: root
 
-- name: SSH Configuration (Private Key and Config File)
+- name: SSH Configuration (Private Key and User Config File)
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -50,5 +50,29 @@
         value: "{{ item.value }}"
         state: present
       loop: "{{ TILIX_CONFIGURATION_KEYBINDINGS }}"
+  become: yes
+  become_user: "{{ COMMON_USER }}"
+
+- name: Atom Configuration
+  block:
+    - name: Atom Configuration - Check Plugins
+      stat:
+        path: "/home/{{ COMMON_USER }}/.atom/packages/{{ item }}"
+      register: check_atom_plugins
+      loop: "{{ ATOM_PLUGINS }}"
+    - name: Atom Configuration - Install Plugins
+      shell: "apm install {{ item.0 }}"
+      when: item.1 == False
+      with_together: 
+      - "{{ check_atom_plugins | json_query('results[*].item') }}"
+      - "{{ check_atom_plugins | json_query('results[*].stat.exists') }}"
+    - name: Atom Configuration - Config File
+      copy:
+        src: "{{ role_path }}/files/config.cson"
+        dest: "/home/{{ COMMON_USER }}/.atom/"
+        backup: yes
+        owner: "{{ COMMON_USER }}"
+        group: "{{ COMMON_USER }}"
+        mode: 0664
   become: yes
   become_user: "{{ COMMON_USER }}"

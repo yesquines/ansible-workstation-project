@@ -91,3 +91,11 @@ TILIX_CONFIGURATION_KEYBINDINGS:
   - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-6", value: "'disabled'"}
   - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-7", value: "'disabled'"}
   - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-0", value: "'<Alt>0'"}
+
+ATOM_PLUGINS:
+  - git-plus
+  - language-markdown
+  - markdown-preview-enhanced
+  - markdown-scroll-sync  
+  - markdown-writer  
+  - pdf-view

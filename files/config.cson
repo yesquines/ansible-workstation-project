@@ -1,0 +1,160 @@
+"*":
+  autosave:
+    enabled: true
+  core:
+    disabledPackages: [
+      "language-gfm"
+      "welcome"
+      "background-tips"
+      "metrics"
+      "whitespace"
+      "markdown-preview-enhanced"
+    ]
+    packagesWithKeymapsDisabled: []
+    telemetryConsent: "no"
+  editor:
+    fontSize: 16
+  "exception-reporting":
+    userId: "f9bd5858-9b1a-4612-a8b4-29e00a1ca285"
+  "git-plus":
+    general:
+      splitPane: "Right"
+  github: {}
+  "markdown-pdf":
+    syntax: "one-dark-syntax"
+  "markdown-preview":
+    breakOnSingleNewline: true
+    useGitHubStyle: true
+  "spell-check":
+    addKnownWords: true
+    grammars: [
+      "source.asciidoc"
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+      "text.plain.null-grammar"
+      "text.md"
+    ]
+    knownWords: [
+      "É"
+      "utilizadas"
+      "pela"
+      "da"
+      "nas"
+      "utilizamos"
+      "ferramentas"
+      "uma"
+      "citadas"
+      "máquinas"
+      "Basicamente"
+      "Relatório"
+      "Técnico"
+      "EAD"
+      "Duração"
+      "CPU"
+      "Conclusões"
+      "Recomendações"
+      "Descrição"
+      "Especificação"
+      "Inventário"
+      "Dinâmico"
+      "Parâmetros"
+      "Média"
+      "Vídeo"
+      "Início"
+      "Avaliação"
+      "Usuário"
+      "Conferência"
+      "Inclusão"
+      "Exigência"
+      "Português"
+      "Não"
+      "Implantação"
+      "Configuração"
+      "Análises"
+      "Áudio"
+      "Período"
+      "Utilização"
+      "Mídia"
+      "Métricas"
+      "Conferências"
+      "Integração"
+      "Memória"
+      "Instância"
+      "Transferência"
+      "Referências"
+      "dividos"
+      "Serão"
+      "Máximo"
+      "Porém"
+      "Transmissão"
+      "Aplicações"
+      "Homologação"
+      "Após"
+      "Análise"
+      "Regiões"
+      "Serviços"
+      "Instâncias"
+      "Serviço"
+      "Máquina"
+      "São"
+      "Região"
+      "Virgínia"
+      "Sugestão"
+      "Cenário"
+      "Gráfico"
+      "Médio"
+      "Máxima"
+      "Produção"
+      "Aplicação"
+      "Compilação"
+      "Além"
+      "Competências"
+      "Introdução"
+      "Instalação"
+      "Espaço"
+      "Sincronização"
+      "Endereço"
+      "Horário"
+      "Repositório"
+      "Inicialização"
+      "Disponível"
+      "Você"
+      "Certificação"
+      "Através"
+      "Faça"
+      "Segurança"
+      "Vários"
+      "Inúmeros"
+      "Construções"
+      "Autenticação"
+      "Página"
+      "Diferenças"
+      "Instruções"
+      "nós"
+      "Opções"
+      "Física"
+      "Réplicas"
+      "Também"
+      "Configurações"
+      "Orquestração"
+      "Genérico"
+      "Automação"
+      "autogerenciado"
+      "Criação"
+      "Operações"
+      "Pública"
+    ]
+    localePaths: [
+      "/usr/share/hunspell/"
+    ]
+    locales: [
+      "pt-BR"
+    ]
+    noticesMode: "console"
+  "ultra-sync":
+    autosync: false
+    interpolate: false
+    levenshtein: false
+  welcome:
+    showOnStartup: false
