@@ -9,7 +9,7 @@
 
 - name: VIM Configuration
   copy:
-    src: "{{ role_path }}/files/vimrc"
+    src: "{{ role_path }}/files/vim/vimrc"
     dest: /etc/vim/vimrc
     backup: yes
     mode: '644'
@@ -68,7 +68,7 @@
       - "{{ check_atom_plugins | json_query('results[*].stat.exists') }}"
     - name: Atom Configuration - Config File
       copy:
-        src: "{{ role_path }}/files/config.cson"
+        src: "{{ role_path }}/files/atom/config.cson"
         dest: "/home/{{ COMMON_USER }}/.atom/"
         backup: yes
         owner: "{{ COMMON_USER }}"

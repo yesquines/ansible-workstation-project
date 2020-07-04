@@ -1,11 +1,11 @@
 COMMON_USER: yago
 
 DIRETORIES:
-  - {path: /root/.ssh/, mode: 750, owner: root, group: root }
+  - {path: /root/.ssh/, mode: '750', owner: root, group: root }
 
 SSH_FILES:
-  - {src: "{{ role_path }}/files/id_rsa", dest: "/root/.ssh/id_rsa"}
-  - {src: "{{ role_path }}/files/config", dest: "/root/.ssh/config"}
+  - {src: "{{ role_path }}/files/ssh/id_rsa", dest: "/root/.ssh/id_rsa"}
+  - {src: "{{ role_path }}/files/ssh/config", dest: "/root/.ssh/config"}
 
 #Get Tilix Configuration run 'dconf dump /com/gexperts/Tilix/ > tilix.dconf'
 TILIX_CONFIGURATION_ROOT:
