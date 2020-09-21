@@ -38,6 +38,8 @@
     filename: "{{ item.name }}"
     state: present
   loop: "{{ REPOSITORY }}"
+  loop_control:
+    label: "{{ Repository: item.name }}"
 
 - name: Install Gnome Minimal
   apt:
@@ -74,12 +76,16 @@
         mode: 0755
         state: directory
       loop: "{{ COMPRESS_PACKAGES }}"
+      loop_control:
+        label: "{{ item.path }}"
     - name: Install Compress Packages
       unarchive:
         src: "{{ item.url }}"
         dest: "{{ item.path }}"
         remote_src: yes
       loop: "{{ COMPRESS_PACKAGES }}"
+      loop_control:
+        label: "{{ item.path }}"
 
 - name: Install Compress Binaries
   block:
@@ -106,3 +112,6 @@
     dest: "{{ item.path }}"
     mode: 0755
   loop: "{{ BINARIES_PACKAGES }}"
+  loop_control:
+    label: "{{ item.path }}"
+
