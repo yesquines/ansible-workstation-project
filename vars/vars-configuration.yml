@@ -2,11 +2,7 @@ COMMON_USER: yago
 
 DIRETORIES:
   - {path: "/root/.ssh/", mode: '750', owner: root, group: root }
-  - {path: "/home/{{ COMMON_USER }}/.mozilla/firefox", mode: '700', owner: "{{ COMMON_USER }}", group: "{{ COMMON_USER }}" }
-
-SSH_FILES:
-  - {src: "{{ role_path }}/files/ssh/id_rsa", dest: "/root/.ssh/id_rsa"}
-  - {src: "{{ role_path }}/files/ssh/config", dest: "/root/.ssh/config"}
+  - {path: "/home/{{ COMMON_USER }}/.mozilla/firefox", mode: '775', owner: "{{ COMMON_USER }}", group: "{{ COMMON_USER }}" }
 
 #Get Tilix Configuration run 'dconf dump /com/gexperts/Tilix/ > tilix.dconf'
 TILIX_CONFIGURATION_ROOT:
@@ -100,3 +96,24 @@ ATOM_PLUGINS:
   - markdown-scroll-sync  
   - markdown-writer  
   - pdf-view
+
+BASHRC_CONFIG:
+  - {regex: '^#?\s+?(HISTCONTROL).*',line: 'HISTCONTROL=ignoreboth'}
+  - {regex: '^#?\s+?(HISTSIZE).*',line: 'HISTSIZE=1000'}
+  - {regex: '^#?\s+?(HISTFILESIZE).*',line: 'HISTFILESIZE=2000'}
+  - {regex: '^#?\s+?(PROMPT_DIRTRIM).*',line: 'PROMPT_DIRTRIM=2'}
+  - {regex: '^#?\s+?(alias)\s(ls).*', line: 'alias ls="ls --color=auto"'}
+  - {regex: '^#?\s+?(alias)\s(grep).*', line: 'alias grep="grep --color=auto"'}
+  - {regex: '^#?\s+?(alias)\s(fgrep).*', line: 'alias fgrep="fgrep --color=auto"'}
+  - {regex: '^#?\s+?(alias)\s(egrep).*', line: 'alias egrep="egrep --color=auto"'}
+  - {regex: '.*(histappend)$', line: 'shopt -s histappend'}
+  - {regex: '.*(checkwinsize)$', line: 'shopt -s checkwinsize'}
+  - {regex: '.*(terraform)$', line: 'complete -C /usr/bin/terraform terraform'}
+  - {regex: '.*(packer)$', line: 'complete -C /usr/bin/packer packer'}
+
+BASHRC_PS1_ROOT:
+  - {regex: '^#?\s+?(TMOUT).*', line: 'TMOUT=300'}
+  - {regex: '^#?\s+?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
+
+BASHRC_PS1_USER:
+  - {regex: '^#?\s+?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "'}

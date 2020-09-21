@@ -6,7 +6,9 @@
     group: "{{ item.group }}"
     state: directory
   loop: "{{ DIRETORIES }}"
-
+  loop_control:
+    label: "{{ item.path }}"
+  
 - name: VIM Configuration
   copy:
     src: "{{ role_path }}/files/vim/vimrc"
@@ -16,16 +18,15 @@
     owner: root
     group: root
 
-- name: SSH Configuration (Private Key and User Config File)
+- name: SSH Configuration (User Config File)
   copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: "{{ role_path }}/files/ssh/config"
+    dest: "/root/.ssh/config"
     mode: '600'
     owner: root
     group: root
-  loop: "{{ SSH_FILES }}"
 
-- name: Tilix Configuration - Defautl Terminal
+- name: Tilix Configuration - Default Terminal
   alternatives:
     name: x-terminal-emulator
     path: /usr/bin/tilix.wrapper
@@ -38,18 +39,24 @@
         value: "{{ item.value }}"
         state: present
       loop: "{{ TILIX_CONFIGURATION_ROOT }}"
+      loop_control:
+        label: "{{ item.key }}"
     - name: Tilix Configuration - PROFILE
       dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
         state: present
       loop: "{{ TILIX_CONFIGURATION_PROFILE }}"
+      loop_control:
+        label: "{{ item.key }}"
     - name: Tilix Configuration - KEYBINDINGS
       dconf:
         key: "{{ item.key }}"
         value: "{{ item.value }}"
         state: present
       loop: "{{ TILIX_CONFIGURATION_KEYBINDINGS }}"
+      loop_control:
+        label: "{{ item.key }}"
   become: yes
   become_user: "{{ COMMON_USER }}"
 
@@ -66,6 +73,8 @@
       with_together: 
       - "{{ check_atom_plugins | json_query('results[*].item') }}"
       - "{{ check_atom_plugins | json_query('results[*].stat.exists') }}"
+      loop_control:
+        label: "{{ item.0 }}"
     - name: Atom Configuration - Config File
       copy:
         src: "{{ role_path }}/files/atom/config.cson"
@@ -77,13 +86,13 @@
   become: yes
   become_user: "{{ COMMON_USER }}"
 
-- name: Ferdi Configuration
-  synchronize:
-    src: "{{ role_path }}/files/ferdi/"
-    dest: "/home/{{ COMMON_USER }}/.config/Ferdi/"
-    owner: yes
-    group: yes
-    recursive: yes
+- name: Ferdi Basic Configuration
+  copy:
+    src: "{{ role_path }}/files/ferdi/settings.json"
+    dest: "/home/{{ COMMON_USER }}/.config/Ferdi/config/"
+    owner: "{{ COMMON_USER }}"
+    group: "{{ COMMON_USER }}"
+    mode: '664'
   become: yes
   become_user: "{{ COMMON_USER }}"
 
@@ -104,3 +113,38 @@
         recursive: yes
   become: yes
   become_user: "{{ COMMON_USER }}"
+
+- name: Bashrc Configuration
+  block:
+    - name: Bashrc - General Configuration
+      lineinfile:
+        path: "{{ item.0 }}"
+        regexp: "{{ item.1.regex }}"
+        line: "{{ item.1.line }}"
+      with_nested: 
+      - ["/root/.bashrc","/home/{{ COMMON_USER }}/.bashrc"] 
+      - "{{ BASHRC_CONFIG }}"
+      loop_control:
+        label: "{{ item.0 }} | {{ item.1.line }}"
+    - name: Bashrc - Root Configuration
+      lineinfile:
+        path: /root/.bashrc 
+        regexp: "{{ item.regex }}"
+        line: "{{ item.line }}"
+      loop: "{{ BASHRC_PS1_ROOT }}"
+      loop_control:
+        label: "{{ item.line | regex_search('TMOUT|PS1') }}"
+    - name: Bashrc - User Configuration
+      lineinfile:
+        path: "/home/{{ COMMON_USER }}/.bashrc"
+        regexp: "{{ item.regex }}"
+        line: "{{ item.line }}"
+      loop: "{{ BASHRC_PS1_USER }}"
+      loop_control:
+        label: "{{ item.line | regex_search('PS1') }}"
+    - name: Sync Bash Completion Scripts
+      synchronize:
+        src: "{{ role_path }}/files/profiles/bash_completion.d/"
+        dest: "/etc/bash_completion.d/"
+        recursive: yes
+
