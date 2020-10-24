@@ -68,6 +68,11 @@
    deb: "{{ item }}"
   loop: "{{ DEB_PACKAGES }}"
 
+- name: Install NPM Package
+  npm:
+    name: taskbook
+    global: yes
+
 - name: Install Compress Packages
   block:
     - name: Ensure Packages Directories
