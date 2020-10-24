@@ -15,6 +15,7 @@ REPOSITORY:
   - { repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main", name: "kubernetes"}
   - { repo: "deb https://dbeaver.io/debs/dbeaver-ce /", name: "dbeaver"}
   - { repo: "deb https://packages.cloud.google.com/apt cloud-sdk main", name: "google-cloud"}
+  - { repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main", name: "hashi-corp" }
 
 KEYS:
   - "https://dbeaver.io/debs/dbeaver.gpg.key"
@@ -23,6 +24,7 @@ KEYS:
   - "https://download.spotify.com/debian/pubkey.gpg"
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+  - "https://apt.releases.hashicorp.com/gpg"
 
 KEYS_SERVER:
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
@@ -100,6 +102,7 @@ DEPENDENCIES:
   - mariadb-client
   - myspell-pt-br
   - nmap
+  - nodejs
   - openjdk-11-jdk
   - openjdk-11-jre
   - openssh-client
@@ -143,6 +146,7 @@ PACKAGES:
   - libreoffice
   - nautilus-nextcloud
   - nextcloud-desktop
+  - npm
   - obs-studio
   - packer
   - postgresql-client
@@ -153,9 +157,11 @@ PACKAGES:
   - ssg-debderived 
   - ssg-debian 
   - ssg-nondebian 
+  - terraform
   - tilix
   - tor
   - transmission
+  - vagrant
   - vlc
  #- virtualbox-guest-additions-iso # virtualbox-guest-dkms, virtualbox-guest-utils, virtualbox-ext-pack, virtualbox-dkms, virtualbox-qt
  #- "virtualbox-{{ virtualbox_latest }}"
@@ -172,7 +178,6 @@ DEB_PACKAGES:
   - "https://github.com/ksnip/ksnip/releases/download/v{{ ksnip_latest }}/ksnip-{{ ksnip_latest }}.deb"
   - "https://go.skype.com/skypeforlinux-64.deb"
   - "https://hadler.me/files/forticlient-sslvpn_{{ forticlient_latest }}_amd64.deb"
-  - "https://releases.hashicorp.com/vagrant/{{ vagrant_latest }}/vagrant_{{ vagrant_latest }}_x86_64.deb"
   - "https://zoom.us/client/latest/zoom_amd64.deb"
 
 BINARIES_PATH: "/usr/bin"
@@ -180,12 +185,10 @@ PACKAGE_PATH: "/opt"
 
 COMPRESS_PACKAGES:
   - { url: "http://mirror.nbtelecom.com.br/apache/directory/studio/{{ apachedirectory_latest }}/ApacheDirectoryStudio-{{ apachedirectory_latest }}-linux.gtk.x86_64.tar.gz", path: "{{ PACKAGE_PATH }}" }
-  - { url: "https://get.popcorntime.app/build/Popcorn-Time-{{ popcorn_latest }}-linux64.zip", path: "{{ PACKAGE_PATH }}/Popcorn-Time/" }
 
 COMPRESS_BINARIES:
   - "https://github.com/minishift/minishift/releases/download/v{{ minishift_latest }}/minishift-{{ minishift_latest }}-linux-amd64.tgz"
   - "https://github.com/openshift/origin/releases/download/v{{ openshift_latest }}/openshift-origin-client-tools-v{{ openshift_latest }}-0cbc58b-linux-64bit.tar.gz"
-  - "https://releases.hashicorp.com/terraform/{{ terraform_latest }}/terraform_{{ terraform_latest }}_linux_amd64.zip"
 
 BINARIES_PACKAGES:
   - { url: "https://github.com/docker/machine/releases/download/v{{ dockermachine_latest }}/docker-machine-Linux-x86_64", path: "{{ BINARIES_PATH }}/docker-machine"}
@@ -200,8 +203,5 @@ forticlient_latest: "4.4.2333-1"
 ksnip_latest: "1.7.0"
 minishift_latest: "1.34.2"
 openshift_latest: "3.11.0"
-popcorn_latest: "0.4.4"
 simplenote_latest: "1.17.0"
-terraform_latest: "0.12.26"
-vagrant_latest: "2.2.9"
 virtualbox_latest: "6.1"
