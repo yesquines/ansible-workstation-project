@@ -148,3 +148,9 @@
         dest: "/etc/bash_completion.d/"
         recursive: yes
 
+- name: Sincronizando .desktops
+  synchronize:
+    src: "{{ role_path }}/files/desktop-files/"
+    dest: "/usr/share/applications/"
+    recursive: yes
+ 

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Apache Directory Studio
+Comment=Apache Directory Studio
+Exec=/opt/ApacheDirectoryStudio/ApacheDirectoryStudio
+#Terminal=true
+Type=Application
+Categories=System;
+Keywords=ldap;
+Icon=/opt/ApacheDirectoryStudio/icon.xpm
