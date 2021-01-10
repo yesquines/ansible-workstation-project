@@ -1,0 +1,130 @@
+- name: SSH - Server Configuration
+  template:
+    src: 'sshd_config.j2'
+    dest: '/etc/ssh/sshd_config'
+    mode: '0600'
+    owner: 'root'
+    group: 'root'
+    validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s'
+  notify: restart_sshd
+
+- name: SSH - Client Configuration
+  template:
+    src: 'ssh_config.j2'
+    dest: '/etc/ssh/ssh_config'
+    mode: '0644'
+    owner: 'root'
+    group: 'root'
+
+- name: Limits - Prevent Core Dumps
+  block:
+  - name: Limits - Create limits.d Directory
+    file:
+      path: '/etc/security/limits.d'
+      owner: 'root'
+      group: 'root'
+      mode: '0755'
+      state: 'directory'
+  - name: Limits - File permission
+    file:
+      path: /etc/security/limits.d/10.hardcore.conf
+      owner: 'root'
+      group: 'root'
+      mode: '0440'
+  - name: Limits - Prevent Core Dumps
+    pam_limits:
+      dest: '/etc/security/limits.d/10.hardcore.conf'
+      domain: '*'
+      limit_type: hard
+      limit_item: core
+      value: '0'
+      comment: Prevent core dumps for all users. These are usually not needed and may contain sensitive information
+
+- name: LoginDefs - Configuration
+  template:
+    src: 'login.defs.j2'
+    dest: '/etc/login.defs'
+    owner: 'root'
+    group: 'root'
+    mode: '0444'
+
+- name: Minimize Access - write-permission for group
+  block:
+  - name: Minimize Access - Find files with write-permission
+    find: 
+      paths: "{{ item }}"
+      follow: yes
+      file_type: file
+    loop: 
+    - '/usr/local/sbin'
+    - '/usr/local/bin'
+    - '/usr/sbin'
+    - '/usr/bin'
+    - '/sbin'
+    - '/bin'
+    register: files
+  - name: Minimize Access - Remove write-permission
+    file:
+      path: "{{ item }}"
+      mode: 'go-w'
+      state: file
+    with_flattened: "{{ files | json_query('results[*].files[*].path') }}"
+
+- name: Minimize Access - Ensure permissions on importants files
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop: {{ IMPORTANTS_FILES }}
+  loop_control:
+    label: "{{ item.path }}"
+
+- name: Minimize Access - Option hidepid for /proc
+  mount:
+    path: /proc
+    src: proc
+    fstype: proc
+    opts: "{{ mount_proc_options }}"
+    state: present
+
+- name: Disable unused filesystems
+  block:
+  - name: Disable unused filesystems
+    lineinfile:
+      path: /etc/modprobe.d/unused-filesystems.conf
+      create: yes
+      line: "install {{ item }} /bin/true"
+    loop: "{{ UNUSED_FILESYSTEMS }}"
+  - name: Disable unused filesystems
+    modeprobe:
+      name: "{{ item }}"
+      state: absent
+    loop: "{{ UNUSED_FILESYSTEMS }}"
+
+- name: Disable Uncommon Network Protocols
+  block:
+  - name: Disable Uncommon Network Protocols
+    lineinfile:
+      path: /etc/modprobe.d/uncommon_network_protocols.conf
+      create: yes
+      line: "install {{ item }} /bin/true"
+    loop: "{{ UNCOMMON_PROTOCOLS }}"
+  - name: Disable unused filesystems
+    modeprobe:
+      name: "{{ item }}"
+      state: absent
+    loop: "{{ UNCOMMON_PROTOCOLS }}"
+
+- name: SYSCTL - Configure Kernel parameters 
+  sysctl:
+    name: '{{ item.key }}'
+    value: '{{ item.value }}'
+    sysctl_set: true
+    state: present
+    reload: true
+    ignoreerrors: true
+  with_dict: '{{ sysctl_config }}'
+  loop_control:
+    label: "{{ item.key }}"
+

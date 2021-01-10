@@ -1,0 +1,129 @@
+#SSH VARS
+
+## Server
+ssh_permit_root_login: no 
+ssh_server_port: 22
+addressfamily: inet
+ssh_listen_to: ['0.0.0.0']
+sshd_strict_modes: 'yes'
+sshd_syslog_facility: 'AUTH'
+sshd_log_level: 'VERBOSE'
+ssh_login_grace_time: 60s
+ssh_max_auth_retries: 3
+ssh_max_sessions: 3
+ssh_max_startups: '10:30:100'
+sshd_authenticationmethods: 'publickey,password'
+ssh_server_password_login: 'yes'
+ssh_challengeresponseauthentication: 'no'
+ssh_client_alive_interval: 600
+ssh_client_alive_count: 5
+ssh_permit_tunnel: 'no'
+ssh_allow_tcp_forwarding: 'no'
+ssh_allow_agent_forwarding: 'no'
+ssh_gateway_ports: 'no'
+ssh_x11_forwarding: 'no'
+ssh_server_permit_environment_vars: 'no'
+ssh_server_accept_env_vars: 'LANG LC_*'
+ssh_compression: 'no'
+ssh_use_dns: 'no'
+ssh_print_motd: 'no'
+ssh_print_last_log: 'no'
+ssh_banner: 'no'
+ssh_print_debian_banner: 'none'
+
+## Client
+ssh_client_port: 22
+ssh_client_password_login: 'yes'
+ssh_client_compression: 'no'
+ssh_client_roaming: 'no'
+ssh_client_hashknoenhosts: 'yes'
+ssh_client_sendenv: 'LANG LC_*'
+
+# OS Security
+logindefs_mail_dir: /var/mail
+logindefs_umask: '027'
+logindefs_max_age: '90'
+logindefs_min_age: '0'
+logindefs_retries: '5'
+logindefs_timeout: '60'
+logindefs_homeless: 'no'
+
+IMPORTANTS_FILES:
+  - {path: /etc/shadow, owner: root, group: shadow, mode: '0640' }
+  - {path: /etc/passwd, owner: root, group: root, mode: '0644' }
+  - {path: /etc/group, owner: root, group: root, mode: '0644' }
+  - {path: /bin/su, owner: root, group: root, mode: '0750' }
+  - {path: /etc/sysctl.conf, owner: root, group: root, mode: '0440'}
+
+mount_proc_options: 'rw,nosuid,nodev,noexec,relatime,hidepid=2'
+
+UNUSED_FILESYSTEMS:
+  - "cramfs"
+  - "freevxfs"
+  - "jffs2"
+  - "hfs"
+  - "hfsplus"
+  - "squashfs"
+  - "udf"
+  - "vfat"
+  - "dccp"  
+  - "rds"  
+  - "sctp"
+  - "tipc" 
+
+UNCOMMON_PROTOCOLS:
+  - "dccp"
+  - "sctp"
+  - "rds"
+  - "tipc"
+
+sysctl_config:
+  fs.protected_hardlinks: 1
+  fs.protected_symlinks: 1
+  fs.suid_dumpable: 0
+  kernel.core_uses_pid: 1
+  kernel.kptr_restrict: 2
+  kernel.kexec_load_disabled: 1
+  kernel.sysrq: 0
+  kernel.randomize_va_space: 2
+  kernel.yama.ptrace_scope: 1
+  net.ipv4.conf.all.rp_filter: 1
+  net.ipv4.conf.default.rp_filter: 1
+  net.ipv4.icmp_echo_ignore_broadcasts: 1
+  net.ipv4.icmp_ignore_bogus_error_responses: 1
+  net.ipv4.icmp_ratelimit: 100
+  net.ipv4.icmp_ratemask: 88089
+  net.ipv4.tcp_timestamps: 0
+  net.ipv4.conf.all.arp_ignore: 1
+  net.ipv4.conf.all.arp_announce: 2
+  net.ipv4.tcp_rfc1337: 1
+  net.ipv4.conf.all.shared_media: 1
+  net.ipv4.conf.default.shared_media: 1
+  net.ipv4.conf.all.accept_source_route: 0
+  net.ipv4.conf.default.accept_source_route: 0
+  net.ipv4.conf.all.send_redirects: 0
+  net.ipv4.conf.default.send_redirects: 0
+  net.ipv4.conf.all.log_martians: 1
+  net.ipv4.conf.default.log_martians: 1
+  net.ipv4.conf.all.log_martians: 1
+  net.ipv4.conf.default.log_martians: 1
+  net.ipv4.conf.default.accept_redirects: 0
+  net.ipv4.conf.all.accept_redirects: 0
+  net.ipv4.conf.all.secure_redirects: 0
+  net.ipv4.conf.default.secure_redirects: 0
+  net.ipv6.conf.default.accept_redirects: 0
+  net.ipv6.conf.all.accept_redirects: 0
+  net.ipv6.conf.all.disable_ipv6: 1
+  net.ipv6.conf.all.forwarding: 0
+  net.ipv6.conf.all.accept_ra: 0
+  net.ipv6.conf.default.accept_ra: 0
+  net.ipv6.conf.default.router_solicitations: 0
+  net.ipv6.conf.default.accept_ra_rtr_pref: 0
+  net.ipv6.conf.default.accept_ra_pinfo: 0
+  net.ipv6.conf.default.accept_ra_defrtr: 0
+  net.ipv6.conf.default.autoconf: 0
+  net.ipv6.conf.default.dad_transmits: 0
+  net.ipv6.conf.default.max_addresses: 1
+  vm.mmap_min_addr: 65536
+  vm.mmap_rnd_bits: 32
+  vm.mmap_rnd_compat_bits: 16
