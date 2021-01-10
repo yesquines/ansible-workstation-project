@@ -17,6 +17,7 @@
     mode: '644'
     owner: root
     group: root
+  when: enable_vim_configuration
 
 - name: SSH Configuration (User Config File)
   copy:
@@ -25,11 +26,13 @@
     mode: '600'
     owner: root
     group: root
+  when: enable_ssh_config_configuration
 
 - name: Tilix Configuration - Default Terminal
   alternatives:
     name: x-terminal-emulator
     path: /usr/bin/tilix.wrapper
+  when: enable_tilix_configuration
 
 - name: Tilix Configuration
   block:
@@ -59,6 +62,7 @@
         label: "{{ item.key }}"
   become: yes
   become_user: "{{ COMMON_USER }}"
+  when: enable_tilix_configuration
 
 - name: Atom Configuration
   block:
@@ -85,16 +89,7 @@
         mode: '664'
   become: yes
   become_user: "{{ COMMON_USER }}"
-
-- name: Ferdi Basic Configuration
-  copy:
-    src: "{{ role_path }}/files/ferdi/settings.json"
-    dest: "/home/{{ COMMON_USER }}/.config/Ferdi/config/"
-    owner: "{{ COMMON_USER }}"
-    group: "{{ COMMON_USER }}"
-    mode: '664'
-  become: yes
-  become_user: "{{ COMMON_USER }}"
+  when: enable_atom_install_plugins
 
 - name: Firefox Configuration
   block:
@@ -147,10 +142,12 @@
         src: "{{ role_path }}/files/profiles/bash_completion.d/"
         dest: "/etc/bash_completion.d/"
         recursive: yes
+  when: enable_bashrc_configuration
 
 - name: Sincronizando .desktops
   synchronize:
     src: "{{ role_path }}/files/desktop-files/"
     dest: "/usr/share/applications/"
     recursive: yes
+  when: enable_desktop_files_configuration
  
