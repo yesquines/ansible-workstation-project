@@ -30,7 +30,6 @@ KEYS_SERVER:
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
   - {keyserver: keyserver.ubuntu.com, id: F3985DE9980B9063} #ASCIIQuarium Key 
 
-
 GNOME_PACKAGES:
   - adwaita-icon-theme
   - baobab
@@ -97,6 +96,7 @@ DEPENDENCIES:
   - htop
   - hunspell-pt-br
   - jq
+  - kmod
   - ldap-utils
   - libvirt-daemon-system
   - mariadb-client
@@ -174,7 +174,6 @@ DEB_PACKAGES:
   - "https://download.teamviewer.com/download/linux/teamviewer_amd64.deb"
   - "https://github.com/Automattic/simplenote-electron/releases/download/v{{ simplenote_latest }}/Simplenote-linux-{{ simplenote_latest }}-amd64.deb"
   - "https://github.com/atom/atom/releases/download/{{ atom_latest }}/atom-amd64.deb"
-  - "https://github.com/getferdi/ferdi/releases/download/v{{ ferdi_latest }}/ferdi_{{ ferdi_latest }}_amd64.deb"
   - "https://github.com/ksnip/ksnip/releases/download/v{{ ksnip_latest }}/ksnip-{{ ksnip_latest }}.deb"
   - "https://go.skype.com/skypeforlinux-64.deb"
   - "https://hadler.me/files/forticlient-sslvpn_{{ forticlient_latest }}_amd64.deb"
