@@ -2,10 +2,9 @@
 # tasks file for nightwing
 - name: Check OS
   fail:
-    msg: "ROLE RUN JUST IN DEBIAN 10.X SYSTEM"
+    msg: "ROLE RUN JUST IN DEBIAN SYSTEM"
   when:
-  - ansible_os_family != "Debian"
-  - ansible_distribuition_major_version is version_compare('10','!=')
+  - ansible_distribution != "Debian"
 
 - name: Remove Graphical Packages
   block:
@@ -41,3 +40,19 @@
     - name: Configure Packages
       include: configuration_packages.yml 
   tags: configuration
+
+- name: Graphical Configuration
+  block:
+    - name: Security - Include Vars
+      include_vars: vars-graphical.yml
+    - name: Security Configuration
+      include: graphical_configuration.yml 
+  tags: graphical
+
+- name: Security Configuration
+  block:
+    - name: Security - Include Vars
+      include_vars: vars-security.yml
+    - name: Security Configuration
+      include: security_configuration.yml 
+  tags: security
