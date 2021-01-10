@@ -3,10 +3,12 @@
     name: "{{ REMOVE_PACKAGES }}"
     purge: yes
     state: absent
+  when: remove_packages
 
 - name: Remove Unless Dependencies
   apt:
     autoremove: yes
+  when: remove_packages
 
 - name: Clean Cache Packages
   apt:

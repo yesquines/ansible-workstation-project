@@ -11,12 +11,14 @@
   rescue:
     - name: DPKG - Add Architecture i386
       command: dpkg --add-architecture i386
+  when: enable_i386
 
 - name: Import Keys - URL
   apt_key:
     url: "{{ item }}"
     state: present
   loop: "{{ KEYS }}"
+  when: add_repo_and_keys
 
 - name: Import Keys - KEYSERVER
   apt_key:
@@ -24,6 +26,7 @@
     id: "{{ item.id }}"
     state: present
   loop: "{{ KEYS_SERVER }}"
+  when: add_repo_and_keys
 
 - name: Ensure Default Debian Repository
   lineinfile:
@@ -31,6 +34,7 @@
     regexp: deb\s+http://deb.debian.org/debian/\s+buster\s+.*
     line: "{{ DEBIAN_REPOSITORY }}"
     state: present
+  when: add_repo_and_keys
 
 - name: Ensure Repository 
   apt_repository:
@@ -40,38 +44,45 @@
   loop: "{{ REPOSITORY }}"
   loop_control:
     label: "{{ Repository: item.name }}"
+  when: add_repo_and_keys
 
 - name: Install Gnome Minimal
   apt:
     name: "{{ GNOME_PACKAGES }}"
     state: present
+  when: enable_gnome_minimal
 
 - name: Install Dependencies
   package:
     name: "{{ DEPENDENCIES }}"
     state: present 
+  when: install_packages
 
 - name: Install Packages
   apt:
     name: "{{ PACKAGES }}"
     update-cache: yes
     state: present
+  when: install_packages
      
 - name: Install Funny Packages :D
   apt:
     name: "{{ FUNNY_PACKAGES }}"
     update-cache: yes
     state: present
+  when: install_packages
 
 - name: Install Deb Packages
   apt:
    deb: "{{ item }}"
   loop: "{{ DEB_PACKAGES }}"
+  when: install_packages
 
 - name: Install NPM Package
   npm:
     name: taskbook
     global: yes
+  when: install_packages
 
 - name: Install Compress Packages
   block:
@@ -91,6 +102,7 @@
       loop: "{{ COMPRESS_PACKAGES }}"
       loop_control:
         label: "{{ item.path }}"
+  when: install_packages
 
 - name: Install Compress Binaries
   block:
@@ -110,6 +122,7 @@
         dest: "{{ BINARIES_PATH }}"
         remote_src: yes
       loop: "{{ decompress | json_query('results[*].files[0]') }}"
+  when: install_packages
 
 - name: Install Binaries Packages
   get_url:
@@ -119,4 +132,5 @@
   loop: "{{ BINARIES_PACKAGES }}"
   loop_control:
     label: "{{ item.path }}"
+  when: install_packages
 
