@@ -20,3 +20,9 @@ REMOVE_PACKAGES:
   - gnome-user-docs
   - gnome-user-share
   - konqueror
+  - xinetd
+  - inetd
+  - ypserv
+  - telnet-server
+  - rsh-server
+  - prelink
