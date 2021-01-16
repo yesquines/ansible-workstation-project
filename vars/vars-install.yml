@@ -39,8 +39,8 @@ GNOME_PACKAGES:
   - eog 
   - ethtool
   - evince
-  - firefox-esr
-  - firefox-esr-l10n-pt-br
+  - firefox
+  - firefox-l10n-pt-br
   - fonts-cantarell 
   - gdm3 
   - gedit 
