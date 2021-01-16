@@ -1,0 +1,151 @@
+theme_file: Matcha-azul.tar.gz
+
+themes_packages:
+  - papirus-icon-theme
+  - oxygen-cursor-theme
+
+background_image: bg_black.jpg
+
+gnome_shell_extension: 
+  - gnome-shell-extension-appindicator
+  - gnome-shell-extension-dash-to-panel
+  - gnome-shell-extension-dashtodock
+  - gnome-shell-extension-taskbar
+
+GRAPHICAL_THEMES:
+  - {key: '/org/gnome/desktop/interface/cursor-theme',value: 'oxy-zion'}
+  - {key: '/org/gnome/desktop/interface/cursor-size',value: '24'}
+  - {key: '/org/gnome/desktop/interface/gtk-theme',value: 'Matcha-azul'}
+  - {key: '/org/gnome/desktop/interface/icon-theme',value: 'Papirus-Dark'}
+
+GNOME_SHELL_CONFIGURATION:
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/autohide-in-fullscreen',value: 'true'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/click-action',value: 'previews'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/custom-theme-running-dots-border-color',value: '#ff0000'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/custom-theme-running-dots-color',value: '#fff'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size',value: '48'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/dock-fixed',value: 'false'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/dock-position',value: 'LEFT'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/extend-height',value: 'false'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/intellihide-mode',value: 'FOCUS_APPLICATION_WINDOWS'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/isolate-monitors',value: 'true'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/isolate-workspaces',value: 'true'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/running-indicator-dominant-color',value: 'true'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/running-indicator-style',value: 'DASHES'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/shift-click-action',value: 'minimize-or-overview'}
+  - {key: '/org/gnome/shell/extensions/dash-to-dock/transparency-mode',value: 'ADAPTIVE'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/dot-position', value: 'BOTTOM'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/panel-position', value: 'TOP'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/intellihide', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/panel-size', value: '27'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/multi-monitors', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/dot-style-focused', value: 'METRO'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/trans-use-dynamic-opacity', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/hotkeys-overlay-combo', value: 'TEMPORARILY'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/dot-style-unfocused', value: 'DOTS'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/taskbar-position', value: 'LEFTPANEL'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-bg', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/appicon-margin', value: '4'}
+  - {key: '/org/gnome/shell/extensions/dash-to-panel/trans-panel-opacity', value: '0.35000000000000003'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-changed', value: false}
+  - {key: '/org/gnome/shell/extensions/TaskBar/appearance-selection', value: 'tasks'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/dash', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-max-right', value: '5'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-workspace-button-color', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-label', value: 'both'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/active-task-background-color-set', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-workspace-button', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/panel-size-bottom', value: '25'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/inactive-task-frame', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/date-menu', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-desktop-button', value: '3'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/showapps-button-toggle', value: 'leftclickappview'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-favorites', value: '0'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-tasks', value: '4'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/tasks-all-workspaces', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/workspace-selector', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/tasks-label', value: 'off'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/tb-label-size-bottom', value: '1'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/scroll-tasks', value: 'off'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/hover-event', value: '0'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/top-panel', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/panel-box', value: '1'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/first-start', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/panel-position', value: '4'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/panel-size', value: '27'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-appview-button', value: '1'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/blink-tasks', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/top-panel-original-background-color', value: 'rgba(0, 0, 0, 240)'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/active-task-frame', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-tasks', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-thumbnail', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/application-menu', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/desktop-button-right-click', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/tb-icon-size-bottom', value: '0'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/bottom-panel-original-background-color', value: 'rgba(0, 0, 0, 238)'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-workspace-button', value: '2'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/bottom-panel', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/activities-button', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/overview', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/workspace-button-width', value: '0'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/system-menu', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/workspace-button-index', value: 'index'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/bottom-panel-vertical', value: '0'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/position-bottom-box', value: '1'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-showapps-button', value: 'false'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/bottom-panel-background-color', value: 'rgb(0,0,0)'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/display-desktop-button', value: 'true'}
+  - {key: '/org/gnome/shell/extensions/TaskBar/reset-flag', value: 'false'}
+
+GRAPHICAL_CONFIGURATION:
+  - {key: '/org/gnome/desktop/background/color-shading-type', value: 'solid'}
+  - {key: '/org/gnome/desktop/background/draw-background',value: 'true'}
+  - {key: '/org/gnome/desktop/background/picture-options',value: 'zoom'}
+  - {key: '/org/gnome/desktop/background/picture-uri',value: 'file://usr/share/backgrounds/bg_back.jpg'}
+  - {key: '/org/gnome/desktop/interface/clock-show-date',value: 'true'}
+  - {key: '/org/gnome/desktop/interface/clock-show-seconds',value: 'true'}
+  - {key: '/org/gnome/desktop/interface/enable-animations',value: 'false'}
+  - {key: '/org/gnome/desktop/interface/show-battery-percentage',value: 'false'}
+  - {key: '/org/gnome/desktop/interface/text-scaling-factor',value: '1'}
+  - {key: '/org/gnome/desktop/interface/toolkit-accessibility',value: 'false'}
+  - {key: '/org/gnome/desktop/notifications/show-in-lock-screen',value: 'false'}
+
+NAUTILUS_CONFIGURATION:
+  - {key: "/org/gnome/nautilus/preferences/search-view", value: "list-view"}
+  - {key: "/org/gnome/nautilus/preferences/default-folder-viewer", value: "icon-view"}
+  - {key: "/org/gnome/nautilus/preferences/search-filter-time-type", value: "last_modified"}
+  - {key: "/org/gnome/nautilus/preferences/fts-default", value: "true"}
+  - {key: "/org/gnome/nautilus/preferences/recursive-search", value: "local-only"}
+  - {key: "/org/gnome/nautilus/preferences/use-experimental-views", value: "false"}
+  - {key: "/org/gnome/nautilus/window-state/sidebar-width", value: "194"}
+  - {key: "/org/gnome/nautilus/window-state/start-with-sidebar", value: "true"}
+  - {key: "/org/gnome/nautilus/window-state/geometry", value: "960x747+512+164"}
+  - {key: "/org/gnome/nautilus/window-state/maximized", value: "true"}
+  - {key: "/org/gnome/nautilus/compression/default-compression-format", value: "zip"}
+  - {key: "/org/gnome/nautilus/icon-view/default-zoom-level", value: "standard"}
+  - {key: "/org/gnome/nautilus/desktop/volumes-visible", value: "false"}
+  - {key: "/org/gnome/nautilus/desktop/trash-icon-visible", value: "false"}
+  - {key: "/org/gnome/nautilus/list-view/default-visible-columns", value: "['name', 'size', 'date_modified']"}
+  - {key: "/org/gnome/nautilus/list-view/default-zoom-level", value: "small"}
+  - {key: "/org/gnome/nautilus/list-view/use-tree-view", value: false}
+  - {key: "/org/gnome/nautilus/list-view/default-column-order", value: "['name', 'size', 'type', 'owner', 'group', 'permissions', 'mime_type', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed', 'recency']"}
+
+GEDIT_CONFIGURATION:
+  - {key: '/org/gnome/gedit/preferences/editor/display-right-margin', value: 'false'}
+  - {key: '/org/gnome/gedit/preferences/editor/highlight-current-line', value: 'false'}
+  - {key: '/org/gnome/gedit/preferences/editor/display-overview-map', value: 'false'}
+  - {key: '/org/gnome/gedit/preferences/editor/bracket-matching', value: 'true'}
+  - {key: '/org/gnome/gedit/preferences/editor/auto-save', value: 'true'}
+  - {key: '/org/gnome/gedit/preferences/editor/scheme', value: 'classic'}
+  - {key: '/org/gnome/gedit/preferences/editor/tabs-size', value: '2'}
+  - {key: '/org/gnome/gedit/preferences/editor/display-line-numbers', value: 'true'}
+  - {key: '/org/gnome/gedit/preferences/editor/insert-spaces', value: 'true'}
+  - {key: '/org/gnome/gedit/preferences/editor/right-margin-position', value: '110'}
+  - {key: '/org/gnome/gedit/preferences/editor/background-pattern', value: 'none'}
+  - {key: '/org/gnome/gedit/preferences/editor/use-default-font', value: 'true'}
+  - {key: '/org/gnome/gedit/preferences/editor/wrap-last-split-mode', value: 'word'}
+  - {key: '/org/gnome/gedit/preferences/editor/auto-save-interval', value: '5'}
+  - {key: '/org/gnome/gedit/preferences/ui/show-tabs-mode', value: 'auto'}
+  - {key: '/org/gnome/gedit/preferences/ui/side-panel-visible', value: 'false'}
+

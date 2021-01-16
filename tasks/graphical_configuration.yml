@@ -1,0 +1,68 @@
+- name: Ensure Themes
+  block:
+    - name: Ensure Themes - tar.gz
+      unarchive:
+        src: "{{ theme_file }}"
+        dest: /usr/share/themes/
+    - name: Ensure Themes - apt
+      apt:
+        name: "{{ themes_packages }}"
+        update_cache: yes
+        status: present
+
+- name: Copy Backgroung Image
+  copy: 
+    src: bg_black.jpg
+    dest: /usr/share/backgrounds/
+
+- name: Configuration Themes
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ GRAPHICAL_THEMES }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Install Gnome Shell Extensions
+  apt:
+    name: "{{ gnome_shell_extension }}"
+    update_cache: yes
+    status: present
+
+- name: Configure Gnome Shell Extensions
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ GNOME_SHELL_CONFIGURATION }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Gnome Shell Configurations
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ GRAPHICAL_CONFIGURATION }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Nautilus Configurations
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ NAUTILUS_CONFIGURATION }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Gedit Configurations
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ GEDIT_CONFIGURATION }}"
+  loop_control:
+    label: "{{ item.key }}"
+
