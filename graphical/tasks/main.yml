@@ -1,0 +1,28 @@
+---
+# tasks file for graphical
+- name: Check OS
+  fail:
+    msg: "ROLE RUN JUST IN {{ linux_distribution }} SYSTEM"
+  when:
+  - ansible_distribution != linux_distribution
+
+- name: Remove Graphical Packages
+  block:
+    - name: Remove Graphical Packages
+      apt:
+        name: "{{ remove_graphical_packages }}"
+        purge: yes 
+        state: absent
+      when: remove_current_graphical
+  tags: remove_graphical
+
+- name: Graphical Configuration
+  block:
+    - name: Graphical - Include Vars
+      include_vars: vars-graphical.yml
+    - name: Graphical Install
+      include: graphical_install.yml
+    - name: Graphical Configuration
+      include: graphical_configuration.yml 
+      when: enable_gnome_configuration
+  tags: graphical
