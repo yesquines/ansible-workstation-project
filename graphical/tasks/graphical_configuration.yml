@@ -8,61 +8,54 @@
       apt:
         name: "{{ themes_packages }}"
         update_cache: yes
-        status: present
+        state: present
 
 - name: Copy Backgroung Image
   copy: 
     src: bg_black.jpg
-    dest: /usr/share/backgrounds/
-
-- name: Configuration Themes
-  dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-    state: present
-  loop: "{{ GRAPHICAL_THEMES }}"
-  loop_control:
-    label: "{{ item.key }}"
-
-- name: Install Gnome Shell Extensions
-  apt:
-    name: "{{ gnome_shell_extension }}"
-    update_cache: yes
-    status: present
-
-- name: Configure Gnome Shell Extensions
-  dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-    state: present
-  loop: "{{ GNOME_SHELL_CONFIGURATION }}"
-  loop_control:
-    label: "{{ item.key }}"
-
-- name: Gnome Shell Configurations
-  dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-    state: present
-  loop: "{{ GRAPHICAL_CONFIGURATION }}"
-  loop_control:
-    label: "{{ item.key }}"
-
-- name: Nautilus Configurations
-  dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-    state: present
-  loop: "{{ NAUTILUS_CONFIGURATION }}"
-  loop_control:
-    label: "{{ item.key }}"
-
-- name: Gedit Configurations
-  dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-    state: present
-  loop: "{{ GEDIT_CONFIGURATION }}"
-  loop_control:
-    label: "{{ item.key }}"
+    dest: /usr/share/images/desktop-base/
+      
+- name: Configure XFCE
+  block:
+    - name: Configure XFCE - directory
+      file: 
+        path: "/home/{{ username }}/.config/xfce4/"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        state: directory 
+    - name: Configure XFCE - helpers.rc
+      lineinfile:
+        path: "/home/{{ username }}/.config/xfce4/helpers.rc"
+        line: "{{ item }}"
+        create: yes
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        state: present
+      loop:
+      - "WebBrowser={{ webBrowser_default }}"
+      - "FileManager={{ fileManager_default }}"  
+    - name: Configura XFCE - static files
+      synchronize:
+        src: "{{ role_path }}/files/xfce4/"
+        dest: "/home/{{ username }}/.config/xfce4/"
+        perms: yes
+        recursive: yes
+      become: yes
+      become_user: "{{ username }}"
+    - name: Configure XFCE - template files
+      template:
+        src: "{{ item }}"
+        dest: "/home/{{ username }}/.config/xfce4/xfconf/xfce-perchannel-xml/"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+      loop:
+      - xfce4-appfinder.xml
+      - xfce4-desktop.xml
+      - xfce4-keyboard-shortcuts.xml
+      - xfce4-panel.xml
+      - xfce4-screensaver.xml
+      - xfce4-settings-editor.xml
+      - xfce4-settings-manager.xml
+      - xfwm4.xml
+      - xsettings.xml
 

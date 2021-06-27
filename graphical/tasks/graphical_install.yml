@@ -1,7 +1,7 @@
 - name: Ensure Default Debian Repository
   lineinfile:
     path: /etc/apt/sources.list
-    regexp: "{{ regex_repositoy }}"
+    regexp: "{{ regexp_repository }}"
     line: "{{ linux_repository }}"
     state: present
   when: ensure_linux_repository
@@ -9,13 +9,22 @@
 - name: Install Gnome Minimal
   apt:
     name: "{{ gnome_packages }}"
+    update_cache: yes
     state: present
   when: enable_gnome_minimal
+
+- name: Install XFCE Minimal
+  apt:
+    name: "{{ xfce_packages }}"
+    state: present
+    update_cache: yes
+    install_recommends: no
+  when: enable_xfce_minimal
 
 - name: Ensure GDM3 Started
   systemd:
     name: gdm3
     enabled: yes
     state: started
-  when: enable_gnome_minimal
+  when: enable_gnome_minimal or enable_xfce_minimal
 

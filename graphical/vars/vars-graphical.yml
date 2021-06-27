@@ -1,6 +1,6 @@
 ---
 # vars-graphical file for graphical
-regex_repository: "deb\s+http://deb.debian.org/debian/\s+.*"
+regexp_repository: 'deb\s+http://deb.debian.org/debian/\s+.*'
 linux_repository: "deb http://deb.debian.org/debian/ unstable main contrib non-free"
 
 gnome_packages:
@@ -44,13 +44,36 @@ gnome_packages:
   - libcanberra-pulse
   - libproxy1-plugin-gsettings
   - nautilus
-  - network-manager-openvpn
-  - network-manager-openvpn-gnome
   - pulseaudio
   - sound-theme-freedesktop
   - system-config-printer-common
   - system-config-printer-udev
   - totem
+  - zenity
+
+xfce_packages:
+  - dconf-cli
+  - dconf-gsettings-backend
+  - evince
+  - firefox
+  - firefox-l10n-pt-br
+  - firefox-l10n-pt-br
+  - gdm3
+  - gedit
+  - gnome-calculator
+  - gnome-sushi
+  - nautilus
+  - pulseaudio
+  - rsync
+  - sound-theme-freedesktop
+  - system-config-printer-common
+  - system-config-printer-udev
+  - totem
+  - xfce4
+  - xfce4-battery-plugin
+  - xfce4-places-plugin
+  - xfce4-screensaver
+  - xfce4-terminal
   - zenity
 
 theme_file: Matcha-azul.tar.gz
@@ -59,165 +82,10 @@ themes_packages:
   - papirus-icon-theme
   - oxygencursors
 
+theme_name: Matcha-azul
+icon_theme_name: Papirus-Dark
+cursor_theme_name: oxy-zion
 background_image: bg_black.jpg
-
-gnome_shell_extension: 
-  - gnome-shell-extension-appindicator
-  - gnome-shell-extension-dash-to-panel
-  - gnome-shell-extension-dashtodock
-
-GRAPHICAL_THEMES:
-  - {key: 'cursor-theme', value: 'oxy-zion'}
-  - {key: 'cursor-size', value: '24'}
-  - {key: 'gtk-theme', value: 'Matcha-azul'}
-  - {key: 'icon-theme', value: 'Papirus-Dark'}
-  - {key: 'clock-show-seconds', value: 'true'}
-  - {key: 'enable-animations', value: 'false'}
-  - {key: 'show-battery-percentage', value: 'false'}
-  - {key: 'text-scaling-factor', value: '1'}
-  - {key: 'toolkit-accessibility', value: 'false'}
-  - {key: 'clock-show-date', value: 'true'}
-    #  - {key: '/org/gnome/desktop/interface/cursor-theme',value: 'oxy-zion'}
-    #  - {key: '/org/gnome/desktop/interface/cursor-size',value: '24'}
-    #  - {key: '/org/gnome/desktop/interface/gtk-theme',value: 'Matcha-azul'}
-    #  - {key: '/org/gnome/desktop/interface/icon-theme',value: 'Papirus-Dark'}
-
-GNOME_SHELL_CONFIGURATION:
-  dashtodock: 
-    - {key: 'autohide-in-fullscreen',value: 'true'}
-    - {key: 'click-action',value: 'previews'}
-    - {key: 'custom-theme-running-dots-border-color',value: '#ff0000'}
-    - {key: 'custom-theme-running-dots-color',value: '#fff'}
-    - {key: 'dash-max-icon-size',value: '48'}
-    - {key: 'dock-fixed',value: 'false'}
-    - {key: 'dock-position',value: 'LEFT'}
-    - {key: 'extend-height',value: 'false'}
-    - {key: 'intellihide-mode',value: 'FOCUS_APPLICATION_WINDOWS'}
-    - {key: 'isolate-monitors',value: 'true'}
-    - {key: 'isolate-workspaces',value: 'true'}
-    - {key: 'running-indicator-dominant-color',value: 'true'}
-    - {key: 'running-indicator-style',value: 'DASHES'}
-    - {key: 'shift-click-action',value: 'minimize-or-overview'}
-    - {key: 'transparency-mode',value: 'ADAPTIVE'}
-  dashtopanel:
-    - {key: 'trans-use-custom-opacity', value: 'true'}
-    - {key: 'dot-position', value: 'BOTTOM'}
-    - {key: 'panel-position', value: 'TOP'}
-    - {key: 'intellihide', value: 'false'}
-    - {key: 'panel-size', value: '27'}
-    - {key: 'multi-monitors', value: 'false'}
-    - {key: 'dot-style-focused', value: 'METRO'}
-    - {key: 'trans-use-dynamic-opacity', value: 'true'}
-    - {key: 'hotkeys-overlay-combo', value: 'TEMPORARILY'}
-    - {key: 'dot-style-unfocused', value: 'DOTS'}
-    - {key: 'taskbar-position', value: 'LEFTPANEL'}
-    - {key: 'trans-use-custom-bg', value: 'false'}
-    - {key: 'appicon-margin', value: '4'}
-    - {key: 'trans-panel-opacity', value: '0.35000000000000003'}
-      #  taskbar:
-      #    - {key: 'position-changed', value: false}
-      #    - {key: 'appearance-selection', value: 'tasks'}
-      #    - {key: 'dash', value: 'true'}
-      #    - {key: 'position-max-right', value: '5'}
-      #    - {key: 'display-workspace-button-color', value: 'true'}
-      #    - {key: 'display-label', value: 'both'}
-      #    - {key: 'active-task-background-color-set', value: 'false'}
-      #    - {key: 'display-workspace-button', value: 'false'}
-      #    - {key: 'panel-size-bottom', value: '25'}
-      #    - {key: 'inactive-task-frame', value: 'false'}
-      #    - {key: 'date-menu', value: 'true'}
-      #    - {key: 'position-desktop-button', value: '3'}
-      #    - {key: 'showapps-button-toggle', value: 'leftclickappview'}
-      #    - {key: 'position-favorites', value: '0'}
-      #    - {key: 'position-tasks', value: '4'}
-      #    - {key: 'tasks-all-workspaces', value: 'false'}
-      #    - {key: 'workspace-selector', value: 'true'}
-      #    - {key: 'tasks-label', value: 'off'}
-      #    - {key: 'tb-label-size-bottom', value: '1'}
-      #    - {key: 'scroll-tasks', value: 'off'}
-      #    - {key: 'hover-event', value: '0'}
-      #    - {key: 'top-panel', value: 'true'}
-      #    - {key: 'panel-box', value: '1'}
-      #    - {key: 'first-start', value: 'false'}
-      #    - {key: 'panel-position', value: '4'}
-      #    - {key: 'panel-size', value: '27'}
-      #    - {key: 'position-appview-button', value: '1'}
-      #    - {key: 'blink-tasks', value: 'true'}
-      #    - {key: 'top-panel-original-background-color', value: 'rgba(0, 0, 0, 240)'}
-      #    - {key: 'active-task-frame', value: 'true'}
-      #    - {key: 'display-tasks', value: 'true'}
-      #    - {key: 'display-thumbnail', value: 'false'}
-      #    - {key: 'application-menu', value: 'false'}
-      #    - {key: 'desktop-button-right-click', value: 'true'}
-      #    - {key: 'tb-icon-size-bottom', value: '0'}
-      #    - {key: 'bottom-panel-original-background-color', value: 'rgba(0, 0, 0, 238)'}
-      #    - {key: 'position-workspace-button', value: '2'}
-      #    - {key: 'bottom-panel', value: 'false'}
-      #    - {key: 'activities-button', value: 'false'}
-      #    - {key: 'overview', value: 'true'}
-      #    - {key: 'workspace-button-width', value: '0'}
-      #    - {key: 'system-menu', value: 'true'}
-      #    - {key: 'workspace-button-index', value: 'index'}
-      #    - {key: 'bottom-panel-vertical', value: '0'}
-      #    - {key: 'position-bottom-box', value: '1'}
-      #    - {key: 'display-showapps-button', value: 'false'}
-      #    - {key: 'bottom-panel-background-color', value: 'rgb(0,0,0)'}
-      #    - {key: 'display-desktop-button', value: 'true'}
-      #    - {key: 'reset-flag', value: 'false'}
-
-GRAPHICAL_CONFIGURATION:
-  background:
-    - {key: 'color-shading-type', value: 'solid'}
-    - {key: 'draw-background',value: 'true'}
-    - {key: 'picture-options',value: 'zoom'}
-    - {key: 'picture-uri',value: 'file:///usr/share/backgrounds/{{ background_image }}'}
-  notifications:
-    - {key: 'show-in-lock-screen',value: 'false'}
-
-NAUTILUS_CONFIGURATION:
-  preferences:
-    - {key: "search-view", value: "list-view"}
-    - {key: "default-folder-viewer", value: "icon-view"}
-    - {key: "search-filter-time-type", value: "last_modified"}
-    - {key: "fts-default", value: "true"}
-    - {key: "recursive-search", value: "local-only"}
-    - {key: "use-experimental-views", value: "false"}
-    - {key: "default-sort-order", value: "type"}
-  windowstate:
-    - {key: "sidebar-width", value: "194"}
-    - {key: "start-with-sidebar", value: "true"}
-    - {key: "geometry", value: "960x747+512+164"}
-    - {key: "maximized", value: "true"}
-  compression:
-    - {key: "default-compression-format", value: "zip"}
-  iconview:
-    - {key: "default-zoom-level", value: "standard"}
-  desktop:
-    - {key: "volumes-visible", value: "false"}
-    - {key: "trash-icon-visible", value: "false"}
-  listview:
-    - {key: "default-visible-columns", value: "['name', 'size', 'date_modified']"}
-    - {key: "default-zoom-level", value: "small"}
-    - {key: "use-tree-view", value: false}
-    - {key: "default-column-order", value: "['name', 'size', 'type', 'owner', 'group', 'permissions', 'mime_type', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed', 'recency']"}
-
-GEDIT_CONFIGURATION:
-  editor:
-    - {key: 'display-right-margin', value: 'false'}
-    - {key: 'highlight-current-line', value: 'false'}
-    - {key: 'display-overview-map', value: 'false'}
-    - {key: 'bracket-matching', value: 'true'}
-    - {key: 'auto-save', value: 'true'}
-    - {key: 'scheme', value: 'classic'}
-    - {key: 'tabs-size', value: '2'}
-    - {key: 'display-line-numbers', value: 'true'}
-    - {key: 'insert-spaces', value: 'true'}
-    - {key: 'right-margin-position', value: '110'}
-    - {key: 'background-pattern', value: 'none'}
-    - {key: 'use-default-font', value: 'true'}
-    - {key: 'wrap-last-split-mode', value: 'word'}
-    - {key: 'auto-save-interval', value: '5'}
-  ui:
-    - {key: 'show-tabs-mode', value: 'auto'}
-    - {key: 'side-panel-visible', value: 'false'}
+webBrowser_default: firefox
+fileManager_default: nautilus
 

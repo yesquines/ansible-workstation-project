@@ -1,8 +1,19 @@
 ---
 # defaults file for graphical
 
+# Define the common User
+username: yago
+
+# Check OS to execute the playbook
+# If you use a different distribution, change this option and the specific Debian modules/collections to your favorite distribution
+linux_distribution: Debian
+
+# Ensure linux repository
+# Currently using Debian Unstable repository
+ensure_linux_repository: true
+
 # Remove current gnome (default Debian graphical environment) and other dependents packages
-# If you use another graphical environment disable this option or change de packages to your favorite graphical environment
+# If you use another graphical environment disable options bellow or change de packages to your favorite graphical environment
 remove_current_graphical: true
 
 remove_graphical_packages:
@@ -16,17 +27,11 @@ remove_graphical_packages:
   - sleuthkit
   - speech-dispatcher
 
-# Check OS to execute the playbook
-# If you use a different distribution, change this option and the specific Debian modules/collections to your favorite distribution
-linux_distribution: Debian
-
-# Ensure linux repository
-# Currently using Debian Unstable repository
-ensure_linux_repository: true
-
 # Enable gnome minimal installation
-# If you use another graphical environment disable this option or change de packages to your favorite graphical environment
-enable_gnome_minimal: true
+enable_gnome_minimal: false
 
-# Enable style configuration on gnome
-enable_gnome_configuration: true
+# Enable xfce minimal installation
+enable_xfce_minimal: true
+
+# Enable style configuration on xfce
+enable_xfce_configuration: true
