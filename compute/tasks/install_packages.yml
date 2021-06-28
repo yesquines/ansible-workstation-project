@@ -3,11 +3,11 @@
     - name: DPKG - Check Architecture
       slurp:
         src: /var/lib/dpkg/arch
-      register: CHECK_ARCHITECTURE
+      register: check_architecture
     - name: DPKG - Check Architecture
       fail:
         msg: Needs add Architecture i386
-      when: CHECK_ARCHITECTURE.content | b64decode != "amd64\ni386\n"
+      when: check_architecture.content | b64decode != "amd64\ni386\n"
   rescue:
     - name: DPKG - Add Architecture i386
       command: dpkg --add-architecture i386
@@ -17,7 +17,7 @@
   apt_key:
     url: "{{ item }}"
     state: present
-  loop: "{{ KEYS }}"
+  loop: "{{ keys }}"
   when: add_repo_and_keys
 
 - name: Import Keys - KEYSERVER
@@ -25,49 +25,36 @@
     keyserver: "{{ item.keyserver }}"
     id: "{{ item.id }}"
     state: present
-  loop: "{{ KEYS_SERVER }}"
-  when: add_repo_and_keys
-
-- name: Ensure Default Debian Repository
-  lineinfile:
-    path: /etc/apt/sources.list
-    regexp: deb\s+http://deb.debian.org/debian/\s+buster\s+.*
-    line: "{{ DEBIAN_REPOSITORY }}"
-    state: present
+  loop: "{{ keys_server }}"
   when: add_repo_and_keys
 
 - name: Ensure Repository 
   apt_repository:
     repo: "{{ item.repo }}"
     filename: "{{ item.name }}"
+    update_cache: no
     state: present
-  loop: "{{ REPOSITORY }}"
+  loop: "{{ repository }}"
   loop_control:
-    label: "{{ Repository: item.name }}"
+    label: "Repository: {{ item.name }}"
   when: add_repo_and_keys
-
-- name: Install Gnome Minimal
-  apt:
-    name: "{{ GNOME_PACKAGES }}"
-    state: present
-  when: enable_gnome_minimal
 
 - name: Install Dependencies
   package:
-    name: "{{ DEPENDENCIES }}"
+    name: "{{ dependencies }}"
     state: present 
   when: install_packages
 
 - name: Install Packages
   apt:
-    name: "{{ PACKAGES }}"
+    name: "{{ packages }}"
     update-cache: yes
     state: present
   when: install_packages
      
 - name: Install Funny Packages :D
   apt:
-    name: "{{ FUNNY_PACKAGES }}"
+    name: "{{ funny_packages }}"
     update-cache: yes
     state: present
   when: install_packages
@@ -75,7 +62,7 @@
 - name: Install Deb Packages
   apt:
    deb: "{{ item }}"
-  loop: "{{ DEB_PACKAGES }}"
+  loop: "{{ deb_packages }}"
   when: install_packages
 
 - name: Install NPM Package
@@ -91,7 +78,7 @@
         path: "{{ item.path }}"
         mode: 0755
         state: directory
-      loop: "{{ COMPRESS_PACKAGES }}"
+      loop: "{{ compress_packages }}"
       loop_control:
         label: "{{ item.path }}"
     - name: Install Compress Packages
@@ -99,7 +86,7 @@
         src: "{{ item.url }}"
         dest: "{{ item.path }}"
         remote_src: yes
-      loop: "{{ COMPRESS_PACKAGES }}"
+      loop: "{{ compress_packages }}"
       loop_control:
         label: "{{ item.path }}"
   when: install_packages
@@ -110,16 +97,16 @@
       unarchive: 
         src: "{{ item }}"
         dest: /tmp/
-        exclude: ['kubectl','LICENSE','README.md','README.adoc']
+        exclude: ['kubectl','LICENSE','README.md','README.adoc'] #Need include other files if necessary
         mode: 0755
         list_files: yes
         remote_src: yes
-      loop: "{{ COMPRESS_BINARIES }}"
+      loop: "{{ compress_binaries }}"
       register: decompress
-    - name: Copy Binaries to "{{ BINARIES_PATH }}"
+    - name: Copy Binaries to "{{ binaries_path }}"
       copy:
         src: "/tmp/{{ item }}"
-        dest: "{{ BINARIES_PATH }}"
+        dest: "{{ binaries_path }}"
         remote_src: yes
       loop: "{{ decompress | json_query('results[*].files[0]') }}"
   when: install_packages
@@ -129,7 +116,7 @@
     url: "{{ item.url }}"
     dest: "{{ item.path }}"
     mode: 0755
-  loop: "{{ BINARIES_PACKAGES }}"
+  loop: "{{ binaries_packages }}"
   loop_control:
     label: "{{ item.path }}"
   when: install_packages
