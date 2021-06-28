@@ -1,95 +1,42 @@
 ---
-# defaults file for nightwing
+# defaults file for compute
 
-CHECK_ARCHITECTURE: "{{lookup('file', '/var/lib/dpkg/arch')}}"
+#check_architecture: "{{lookup('file', '/var/lib/dpkg/arch')}}"
 
-DEBIAN_REPOSITORY: "deb http://deb.debian.org/debian/ buster main contrib non-free"
-
-REPOSITORY:
+repository:
   - { repo: "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main", name: "google-chrome" }
-  - { repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable", name: "docker" }
-  - { repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib", name: "virtualbox" }
+  - { repo: "deb [arch=amd64] https://apt.releases.hashicorp.com buster main", name: "hashi-corp" }
   - { repo: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main", name: "ansible"}
   - { repo: "deb http://ppa.launchpad.net/ytvwld/asciiquarium/ubuntu focal main", name: "asciiquarium" }
-  - { repo: "deb http://repository.spotify.com stable non-free", name: "spotify"}
   - { repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main", name: "kubernetes"}
   - { repo: "deb https://dbeaver.io/debs/dbeaver-ce /", name: "dbeaver"}
   - { repo: "deb https://packages.cloud.google.com/apt cloud-sdk main", name: "google-cloud"}
-  - { repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main", name: "hashi-corp" }
 
-KEYS:
+keys:
+  - "https://apt.releases.hashicorp.com/gpg"
   - "https://dbeaver.io/debs/dbeaver.gpg.key"
   - "https://dl.google.com/linux/linux_signing_key.pub"
   - "https://download.docker.com/linux/debian/gpg"
-  - "https://download.spotify.com/debian/pubkey.gpg"
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
-  - "https://apt.releases.hashicorp.com/gpg"
 
-KEYS_SERVER:
+keys_server:
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
   - {keyserver: keyserver.ubuntu.com, id: F3985DE9980B9063} #ASCIIQuarium Key 
 
-GNOME_PACKAGES:
-  - adwaita-icon-theme
-  - baobab
-  - caribou 
-  - dconf-cli 
-  - dconf-gsettings-backend
-  - eog 
-  - ethtool
-  - evince
-  - firefox
-  - firefox-l10n-pt-br
-  - fonts-cantarell 
-  - gdm3 
-  - gedit 
-  - gkbd-capplet
-  - glib-networking 
-  - gnome-bluetooth 
-  - gnome-calculator
-  - gnome-control-center
-  - gnome-disk-utility
-  - gnome-menus
-  - gnome-online-accounts
-  - gnome-session
-  - gnome-settings-daemon
-  - gnome-shell
-  - gnome-shell-extensions
-  - gnome-sushi
-  - gnome-system-monitor
-  - gnome-terminal
-  - gnome-tweaks
-  - gsettings-desktop-schemas
-  - gstreamer1.0-packagekit
-  - gstreamer1.0-plugins-base
-  - gstreamer1.0-plugins-good
-  - gstreamer1.0-pulseaudio 
-  - gvfs-backends
-  - gvfs-bin
-  - gvfs-fuse
-  - libcanberra-pulse
-  - libproxy1-plugin-gsettings
-  - nautilus
-  - network-manager-openvpn
-  - network-manager-openvpn-gnome
-  - pulseaudio
-  - sound-theme-freedesktop
-  - system-config-printer-common
-  - system-config-printer-udev
-  - totem
-  - zenity
-
-DEPENDENCIES:
+dependencies:
   - apt-transport-https
   - aptitude
   - aspell-pt-br
   - bash-completion
   - ca-certificates
   - curl
+  - default-jdk
+  - default-jre
   - dnsutils
   - ffmpeg
   - gdebi
+  - gir1.2-keybinder-3.0
   - git
   - gnupg
   - gnupg-agent
@@ -103,15 +50,17 @@ DEPENDENCIES:
   - myspell-pt-br
   - nmap
   - nodejs
-  - openjdk-11-jdk
-  - openjdk-11-jre
   - openssh-client
   - openssh-server
   - openvpn
   - powerline
   - python
-  - python-psutil
   - python3
+  - python3-distutils-extra
+  - python3-levenshtein
+  - python3-psutil
+  - python3-pyinotify
+  - python3-websocket
   - shotwell
   - software-properties-common
   - sshfs
@@ -126,15 +75,13 @@ DEPENDENCIES:
   - wget
   - zip
 
-PACKAGES:
+packages:
   - ansible
   - audacity
   - awscli
-  - containerd.io
   - dbeaver-ce
-  - docker-ce 
-  - docker-ce-cli 
   - docker-compose
+  - docker.io
   - filezilla
   - gimp
   - google-chrome-stable
@@ -142,21 +89,22 @@ PACKAGES:
   - jmeter
   - keepassxc
   - kubectl
-  - libopenscap8
   - libreoffice
   - nautilus-nextcloud
+  - network-manager-openconnect
+  - network-manager-openconnect-gnome
+  - network-manager-openvpn
+  - network-manager-openvpn-gnome
   - nextcloud-desktop
   - npm
   - obs-studio
+  - openconnect
+  - openfortivpn
+  - openvpn
   - packer
   - postgresql-client
   - privoxy
   - python3-pip
-  - ssg-applications
-  - ssg-base 
-  - ssg-debderived 
-  - ssg-debian 
-  - ssg-nondebian 
   - terraform
   - tilix
   - tor
@@ -164,43 +112,58 @@ PACKAGES:
   - vagrant
   - vlc
  #- virtualbox-guest-additions-iso # virtualbox-guest-dkms, virtualbox-guest-utils, virtualbox-ext-pack, virtualbox-dkms, virtualbox-qt
- #- "virtualbox-{{ virtualbox_latest }}"
+ #- "virtualbox
  
-FUNNY_PACKAGES: ['cmatrix','hollywood','figlet','cowsay','cowsay-off','fortunes-br','elinks','lolcat','jstest-gtk','qjoypad','spotify-client','nsnake','asciiquarium']
+funny_packages: ['cmatrix','hollywood','figlet','cowsay','cowsay-off','fortunes-br','elinks','lolcat','jstest-gtk','qjoypad','nsnake','asciiquarium']
 # steam
 
+remove_packages:
+  - brasero-common
+  - cheese
+  - fonts-dejavu-core
+  - fonts-droid-fallback
+  - fonts-sil-gentium
+  - fonts-sil-gentium-basic
+  - gnome-keyring-pkcs11
+  - gnome-user-docs
+  - gnome-user-share
+  - konqueror
+  - xinetd
+  - inetd
+  - ypserv
+  - telnet-server
+  - rsh-server
+  - prelink
 
-DEB_PACKAGES:
-  - "https://download.teamviewer.com/download/linux/teamviewer_amd64.deb"
+deb_packages:
   - "https://github.com/Automattic/simplenote-electron/releases/download/v{{ simplenote_latest }}/Simplenote-linux-{{ simplenote_latest }}-amd64.deb"
+  - "https://github.com/Ulauncher/Ulauncher/releases/download/{{ ulauncher_latest }}/ulauncher_{{ ulauncher_latest }}_all.deb"
   - "https://github.com/atom/atom/releases/download/{{ atom_latest }}/atom-amd64.deb"
+  - "https://github.com/charmbracelet/glow/releases/download/v{{ glow_latest }}/glow_{{ glow_latest }}_linux_amd64.deb"
   - "https://github.com/ksnip/ksnip/releases/download/v{{ ksnip_latest }}/ksnip-{{ ksnip_latest }}.deb"
-  - "https://go.skype.com/skypeforlinux-64.deb"
-  - "https://hadler.me/files/forticlient-sslvpn_{{ forticlient_latest }}_amd64.deb"
-  - "https://zoom.us/client/latest/zoom_amd64.deb"
 
-BINARIES_PATH: "/usr/bin"
-PACKAGE_PATH: "/opt"
+binaries_path: "/usr/bin"
+package_path: "/opt"
 
-COMPRESS_PACKAGES:
-  - { url: "http://mirror.nbtelecom.com.br/apache/directory/studio/{{ apachedirectory_latest }}/ApacheDirectoryStudio-{{ apachedirectory_latest }}-linux.gtk.x86_64.tar.gz", path: "{{ PACKAGE_PATH }}" }
+compress_packages:
+  - { url: "https://downloads.apache.org/directory/studio/{{ apachedirectory_latest }}/ApacheDirectoryStudio-{{ apachedirectory_latest }}-linux.gtk.x86_64.tar.gz", path: "{{ package_path }}" }
 
-COMPRESS_BINARIES:
+compress_binaries:
   - "https://github.com/minishift/minishift/releases/download/v{{ minishift_latest }}/minishift-{{ minishift_latest }}-linux-amd64.tgz"
   - "https://github.com/openshift/origin/releases/download/v{{ openshift_latest }}/openshift-origin-client-tools-v{{ openshift_latest }}-0cbc58b-linux-64bit.tar.gz"
 
-BINARIES_PACKAGES:
-  - { url: "https://github.com/docker/machine/releases/download/v{{ dockermachine_latest }}/docker-machine-Linux-x86_64", path: "{{ BINARIES_PATH }}/docker-machine"}
-  - { url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64", path: "{{ BINARIES_PATH }}/minikube"}
+binaries_packages:
+  - { url: "https://github.com/docker/machine/releases/download/v{{ dockermachine_latest }}/docker-machine-Linux-x86_64", path: "{{ binaries_path }}/docker-machine"}
+  - { url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64", path: "{{ binaries_path }}/minikube"}
 
 #Versions
 apachedirectory_latest: "2.0.0.v20200411-M15"
-atom_latest: "v1.47.0"
+atom_latest: "v1.54.0"
 dockermachine_latest: "0.16.2"
-ferdi_latest: "5.5.0"
-forticlient_latest: "4.4.2333-1"
+glow_latest: "1.4.0"
 ksnip_latest: "1.7.0"
 minishift_latest: "1.34.2"
 openshift_latest: "3.11.0"
 simplenote_latest: "1.17.0"
-virtualbox_latest: "6.1"
+ulauncher_latest: "5.11.0"
+#virtualbox_latest: "6.1"

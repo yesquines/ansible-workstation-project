@@ -1,6 +1,6 @@
 - name: Remove Packages
   apt:
-    name: "{{ REMOVE_PACKAGES }}"
+    name: "{{ remove_packages }}"
     purge: yes
     state: absent
   when: remove_packages
