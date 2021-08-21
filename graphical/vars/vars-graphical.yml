@@ -64,6 +64,7 @@ xfce_packages:
   - gnome-sushi
   - nautilus
   - pulseaudio
+  - pavucontrol
   - rsync
   - sound-theme-freedesktop
   - system-config-printer-common
@@ -71,9 +72,11 @@ xfce_packages:
   - totem
   - xfce4
   - xfce4-battery-plugin
+  - xfce4-notifyd
   - xfce4-places-plugin
   - xfce4-screensaver
   - xfce4-terminal
+  - xfce4-whiskermenu-plugin
   - zenity
 
 theme_file: Matcha-azul.tar.gz
