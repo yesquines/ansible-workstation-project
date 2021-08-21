@@ -19,6 +19,7 @@
     group: root
   when: enable_vim_configuration
 
+# EXCLUIR
 - name: SSH Configuration (User Config File)
   copy:
     src: "{{ role_path }}/files/ssh/config"
@@ -61,14 +62,14 @@
       loop_control:
         label: "{{ item.key }}"
   become: yes
-  become_user: "{{ COMMON_USER }}"
+  become_user: "{{ username }}"
   when: enable_tilix_configuration
 
 - name: Atom Configuration
   block:
     - name: Atom Configuration - Check Plugins
       stat:
-        path: "/home/{{ COMMON_USER }}/.atom/packages/{{ item }}"
+        path: "/home/{{ username }}/.atom/packages/{{ item }}"
       register: check_atom_plugins
       loop: "{{ ATOM_PLUGINS }}"
     - name: Atom Configuration - Install Plugins
@@ -82,32 +83,32 @@
     - name: Atom Configuration - Config File
       copy:
         src: "{{ role_path }}/files/atom/config.cson"
-        dest: "/home/{{ COMMON_USER }}/.atom/"
+        dest: "/home/{{ username }}/.atom/"
         backup: yes
-        owner: "{{ COMMON_USER }}"
-        group: "{{ COMMON_USER }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: '664'
   become: yes
-  become_user: "{{ COMMON_USER }}"
+  become_user: "{{ username }}"
   when: enable_atom_install_plugins
 
 - name: Firefox Configuration
   block:
     - name: Firefox Configuration - Check Profile
       stat:
-        path: "/home/{{ COMMON_USER }}/.mozilla/firefox/default"
+        path: "/home/{{ username }}/.mozilla/firefox/default"
       register: check_firefox_profile
     - name: Firefox Configuration - Create Profile
-      shell: "firefox -CreateProfile 'default /home/{{ COMMON_USER }}/.mozilla/firefox/default' --display=:0"
+      shell: "firefox -CreateProfile 'default /home/{{ username }}/.mozilla/firefox/default' --display=:0" #It's necessary someone logged in graphical mode to enable Display :0
       when: check_firefox_profile.stat.exists == False
     - name: Firefox Configuration - Profile Files
       synchronize:
         src: "{{ role_path }}/files/firefox/"
-        dest: "/home/{{ COMMON_USER }}/.mozilla/firefox/"
+        dest: "/home/{{ username }}/.mozilla/firefox/"
         perms: yes
         recursive: yes
   become: yes
-  become_user: "{{ COMMON_USER }}"
+  become_user: "{{ username }}"
 
 - name: Bashrc Configuration
   block:
@@ -117,7 +118,7 @@
         regexp: "{{ item.1.regex }}"
         line: "{{ item.1.line }}"
       with_nested: 
-      - ["/root/.bashrc","/home/{{ COMMON_USER }}/.bashrc"] 
+      - ["/root/.bashrc","/home/{{ username }}/.bashrc"] 
       - "{{ BASHRC_CONFIG }}"
       loop_control:
         label: "{{ item.0 }} | {{ item.1.line }}"
@@ -131,7 +132,7 @@
         label: "{{ item.line | regex_search('TMOUT|PS1') }}"
     - name: Bashrc - User Configuration
       lineinfile:
-        path: "/home/{{ COMMON_USER }}/.bashrc"
+        path: "/home/{{ username }}/.bashrc"
         regexp: "{{ item.regex }}"
         line: "{{ item.line }}"
       loop: "{{ BASHRC_PS1_USER }}"
@@ -139,15 +140,27 @@
         label: "{{ item.line | regex_search('PS1') }}"
     - name: Sync Bash Completion Scripts
       synchronize:
-        src: "{{ role_path }}/files/profiles/bash_completion.d/"
-        dest: "/etc/bash_completion.d/"
+        src: "{{ role_path }}/files/profiles/bash_completion.d"
+        dest: "/tmp/"
         recursive: yes
+    - name: Copy Bash Completion Scripts  
+      copy:
+        src: "/tmp/bash_completion.d/"
+        dest: "/etc/bash_completion.d/"
+        remote_src: yes
   when: enable_bashrc_configuration
 
-- name: Sincronizando .desktops
-  synchronize:
-    src: "{{ role_path }}/files/desktop-files/"
-    dest: "/usr/share/applications/"
-    recursive: yes
+- name: Bock - Sync .desktops
+  block:
+    - name: Sync .desktops
+      synchronize:
+        src: "{{ role_path }}/files/desktop-files"
+        dest: "/tmp/"
+        recursive: yes
+    - name: Copy .desktops
+      copy:
+        src: "/tmp/desktop-files/"
+        dest: "/usr/share/applications/"
+        remote_src: yes
   when: enable_desktop_files_configuration
  

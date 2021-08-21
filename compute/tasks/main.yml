@@ -1,26 +1,15 @@
 ---
-# tasks file for nightwing
+# tasks file for compute
 - name: Check OS
   fail:
-    msg: "ROLE RUN JUST IN DEBIAN SYSTEM"
+    msg: "ROLE RUN JUST IN {{ linux_distribution }} SYSTEM"
   when:
-  - ansible_distribution != "Debian"
-
-- name: Remove Graphical Packages
-  block:
-    - name: Remove Graphical - Include Vars
-      include_vars: vars-remove.yml
-    - name: Remove Graphical Packages
-      apt:
-        name: "{{ REMOVE_GRAPHICAL_PACKAGES }}"
-        purge: yes 
-        state: absent
-  tags: remove_gaphical
+  - ansible_distribution != linux_distribution
 
 - name: Package Instalation
   block:
     - name: Install - Include Vars
-      include_vars: vars-install.yml
+      include_vars: vars-packages.yml
     - name: Install Packages
       include: install_packages.yml 
   tags: install
@@ -28,7 +17,7 @@
 - name: Package Removal 
   block:
     - name: Remove - Include Vars
-      include_vars: vars-remove.yml
+      include_vars: vars-packages.yml
     - name: Remove Packages
       include: remove_packages.yml 
   tags: remove
@@ -40,14 +29,6 @@
     - name: Configure Packages
       include: configuration_packages.yml 
   tags: configuration
-
-- name: Graphical Configuration
-  block:
-    - name: Security - Include Vars
-      include_vars: vars-graphical.yml
-    - name: Security Configuration
-      include: graphical_configuration.yml 
-  tags: graphical
 
 - name: Security Configuration
   block:
