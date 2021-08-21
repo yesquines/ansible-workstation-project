@@ -1,22 +1,22 @@
 # This is the ssh client system-wide configuration file.
-# See sshd_config(5) for more information on any settings used. Comments will be added only to clarify why a configuration was chosen.
+# See ssh_config(5) for more information on any settings used. Comments will be added only to clarify why a configuration was chosen.
 
 # Basic configuration
 # ===================
 
-# Either disable or only allow root login via certificates.
-PermitRootLogin {{ ssh_permit_root_login }}
-
-# Define which port sshd should listen to. Default to `22`.
-Port {{ ssh_server_port }}
-
 # Address family should always be limited to the active network configuration.
-AddressFamily {{ addressfamily }}
+AddressFamily any
 
-# Define which addresses sshd should listen to. Default to `0.0.0.0`, ie make sure you put your desired address in here, since otherwise sshd will listen to everyone.
-{% for address in ssh_listen_to %}
-ListenAddress {{ address }}
-{% endfor %}
+# Global defaults for all Hosts
+Host *
+
+# The port at the destination should be defined
+Port {{ ssh_client_port }}
+
+# Identity file configuration. You may restrict available identity files. Otherwise ssh will search for a pattern and use any that matches.
+#IdentityFile ~/.ssh/identity
+#IdentityFile ~/.ssh/id_rsa
+#IdentityFile ~/.ssh/id_dsa
 
 # Security configuration
 # ======================
@@ -24,109 +24,48 @@ ListenAddress {{ address }}
 # Set the protocol version to 2 for security reasons. Disables legacy support.
 Protocol 2
 
-# Make sure sshd checks file modes and ownership before accepting logins. This prevents accidental misconfiguration.
-StrictModes {{ sshd_strict_modes }}
+# Make sure passphrase querying is enabled
+BatchMode no
 
-# Logging, obsoletes QuietMode and FascistLogging
-SyslogFacility {{ sshd_syslog_facility }}
-LogLevel {{ sshd_log_level }}
+# Prevent IP spoofing by checking to host IP against the `known_hosts` file.
+CheckHostIP yes
 
-# Authentication
-# --------------
-
-# Secure Login directives.
-LoginGraceTime {{ ssh_login_grace_time }}
-MaxAuthTries {{ ssh_max_auth_retries }}
-MaxSessions {{ ssh_max_sessions }}
-MaxStartups {{ ssh_max_startups }}
-
-#HostKey /etc/ssh/ssh_host_rsa_key
-#HostKey /etc/ssh/ssh_host_ecdsa_key
-#HostKey /etc/ssh/ssh_host_ed25519_key
-
-# Enable public key authentication
-PubkeyAuthentication yes
-
-# Never use host-based authentication. It can be exploited.
-IgnoreRhosts yes
-IgnoreUserKnownHosts yes
-HostbasedAuthentication no
-
-# Enable PAM to enforce system wide rules
-UsePAM yes
-
-# Set AuthenticationMethods per default to publickey
-# AuthenticationMethods was introduced in OpenSSH 6.2 - https://www.openssh.com/txt/release-6.2
-AuthenticationMethods {{ sshd_authenticationmethods }}
-
-# Disable password-based authentication, it can allow for potentially easier brute-force attacks.
-PasswordAuthentication {{ ssh_server_password_login }}
-PermitEmptyPasswords no
-ChallengeResponseAuthentication {{ ssh_challengeresponseauthentication }}
-
-# Only enable Kerberos authentication if it is configured.
-#KerberosAuthentication no
-#KerberosOrLocalPasswd no
-#KerberosTicketCleanup yes
-#KerberosGetAFSToken no
-
-# Only enable GSSAPI authentication if it is configured.
-#GSSAPIAuthentication no
-#GSSAPICleanupCredentials yes
-
-# In case you don't use PAM (`UsePAM no`), you can alternatively restrict users and groups here. For key-based authentication this is not necessary, since all keys must be explicitely enabled.
-#DenyUsers 
-#AllowUsers 
-#DenyGroups 
-#AllowGroups 
-#AuthorizedKeysFile 
-#TrustedUserCAKeys 
-#AuthorizedPrincipalsFile 
-
-# Network
-# -------
-
-# Disable TCP keep alive since it is spoofable. Use ClientAlive messages instead, they use the encrypted channel
-TCPKeepAlive no
-
-# Manage `ClientAlive..` signals via interval and maximum count. This will periodically check up to a `..CountMax` number of times within `..Interval` timeframe, and abort the connection once these fail.
-ClientAliveInterval {{ ssh_client_alive_interval }}
-ClientAliveCountMax {{ ssh_client_alive_count }}
-
-# Disable tunneling
-PermitTunnel {{ ssh_permit_tunnel }}
-
-# Disable forwarding tcp connections.
-# no real advantage without denied shell access
-AllowTcpForwarding {{ ssh_allow_tcp_forwarding }}
+# Always ask before adding keys to the `known_hosts` file. Do not set to `yes`.
+StrictHostKeyChecking ask
 
 # Disable agent forwarding, since local agent could be accessed through forwarded connection.
-# no real advantage without denied shell access
-AllowAgentForwarding {{ ssh_allow_agent_forwarding }}
-
-# Do not allow remote port forwardings to bind to non-loopback addresses.
-GatewayPorts {{ ssh_gateway_ports }}
+ForwardAgent no
 
 # Disable X11 forwarding, since local X11 display could be accessed through forwarded connection.
-X11Forwarding {{ ssh_x11_forwarding }}
-X11UseLocalhost yes
+ForwardX11 no
 
-# User environment configuration
-# ==============================
+# Never use host-based authentication. It can be exploited.
+HostbasedAuthentication no
 
-PermitUserEnvironment {{ ssh_server_permit_environment_vars }}
-AcceptEnv {{ ssh_server_accept_env_vars }}
+# Disable password-based authentication, it can allow for potentially easier brute-force attacks.
+PasswordAuthentication {{ ssh_client_password_login }}
+
+# Only use GSSAPIAuthentication if implemented on the network.
+GSSAPIAuthentication no
+GSSAPIDelegateCredentials no
+
+# Disable tunneling
+Tunnel no
+
+# Disable local command execution.
+PermitLocalCommand no
 
 # Misc. configuration
 # ===================
 
-Compression {{ ssh_compression }}
-UseDNS {{ ssh_use_dns }}
+Compression {{ ssh_client_compression }}
 
-PrintMotd {{ ssh_print_motd }}
-PrintLastLog {{ ssh_print_last_log }}
-Banner {{ ssh_banner }}
-DebianBanner {{ ssh_print_debian_banner }}
+#EscapeChar ~
+#VisualHostKey yes
 
-# Reject keys that are explicitly blacklisted
-RevokedKeys /etc/ssh/revoked_keys
+# Disable experimental client roaming. This is known to cause potential issues with secrets being disclosed to malicious servers and defaults to being disabled.
+UseRoaming {{ ssh_client_roaming }}
+
+HashKnownHosts {{ ssh_client_hashknoenhosts }}
+
+SendEnv {{ ssh_client_sendenv }}

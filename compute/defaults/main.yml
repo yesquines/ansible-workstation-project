@@ -1,2 +1,33 @@
 ---
 # defaults file for nightwing
+
+# Check OS to execute the playbook
+# If you use a different distribution, change this option and the specific Debian modules/collections to your favorite distribution
+linux_distribution: Debian
+
+# Enable amd64 and i386 Architectur
+enable_i386: true
+
+# Add Repositories and keys defined in vars/vars-install
+add_repo_and_keys: true
+
+# Enable Install packages defined in vars/vars-install
+install_packages: true
+
+# Define the common User
+username: yago
+
+# Enable VIM Configuration defined in files/vim/vimrc
+enable_vim_configuration: true
+
+# Enable .ssh/config Configuration defined in files/ssh/config
+enable_ssh_config_configuration: false
+
+# Enable Packages configurations defined in vars/vars-configuration
+enable_tilix_configuration: true
+enable_atom_install_plugins: true
+enable_bashrc_configuration: true #And sync Bash Completion files defined in files/profiles/bash_completion.d/
+
+# Enable sync .desktop files defined in files/desktop-files/
+enable_desktop_files_configuration: true
+

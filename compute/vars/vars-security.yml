@@ -1,7 +1,7 @@
 #SSH VARS
 
 ## Server
-ssh_permit_root_login: no 
+ssh_permit_root_login: 'no'
 ssh_server_port: 22
 addressfamily: inet
 ssh_listen_to: ['0.0.0.0']
@@ -29,7 +29,7 @@ ssh_use_dns: 'no'
 ssh_print_motd: 'no'
 ssh_print_last_log: 'no'
 ssh_banner: 'no'
-ssh_print_debian_banner: 'none'
+ssh_print_debian_banner: 'no'
 
 ## Client
 ssh_client_port: 22
@@ -52,7 +52,6 @@ IMPORTANTS_FILES:
   - {path: /etc/shadow, owner: root, group: shadow, mode: '0640' }
   - {path: /etc/passwd, owner: root, group: root, mode: '0644' }
   - {path: /etc/group, owner: root, group: root, mode: '0644' }
-  - {path: /bin/su, owner: root, group: root, mode: '0750' }
   - {path: /etc/sysctl.conf, owner: root, group: root, mode: '0440'}
 
 mount_proc_options: 'rw,nosuid,nodev,noexec,relatime,hidepid=2'
