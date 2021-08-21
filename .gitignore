@@ -1,2 +1,2 @@
 *.travis.yml*
-^xfce4_configurarion*.tar.gz$
+/xfce4_configuration*
