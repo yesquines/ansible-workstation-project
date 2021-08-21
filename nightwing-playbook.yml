@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: yago
+  become: yes
+  become_method: su
+  become_flags: "-"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    configure_graphical: true
+    configure_compute: true
+  roles:
+    - { role: graphical, when: "configure_graphical"}
+    - { role: compute, when: "configure_compute"}
