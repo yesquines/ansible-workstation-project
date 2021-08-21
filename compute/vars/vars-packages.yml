@@ -110,9 +110,14 @@ packages:
   - tor
   - transmission
   - vagrant
+  - virtualbox
+  - virtualbox-dkms
+  - virtualbox-ext-pack
+  - virtualbox-guest-additions-iso 
+  - virtualbox-guest-dkms
+  - virtualbox-guest-utils
+  - virtualbox-qt
   - vlc
- #- virtualbox-guest-additions-iso # virtualbox-guest-dkms, virtualbox-guest-utils, virtualbox-ext-pack, virtualbox-dkms, virtualbox-qt
- #- "virtualbox
  
 funny_packages: ['cmatrix','hollywood','figlet','cowsay','cowsay-off','fortunes-br','elinks','lolcat','jstest-gtk','qjoypad','nsnake','asciiquarium']
 # steam
@@ -146,7 +151,7 @@ binaries_path: "/usr/bin"
 package_path: "/opt"
 
 compress_packages:
-  - { url: "https://downloads.apache.org/directory/studio/{{ apachedirectory_latest }}/ApacheDirectoryStudio-{{ apachedirectory_latest }}-linux.gtk.x86_64.tar.gz", path: "{{ package_path }}" }
+  - { url: "https://dlcdn.apache.org/directory/studio/{{ apachedirectory_latest }}/ApacheDirectoryStudio-{{ apachedirectory_latest }}-linux.gtk.x86_64.tar.gz", path: "{{ package_path }}" }
 
 compress_binaries:
   - "https://github.com/minishift/minishift/releases/download/v{{ minishift_latest }}/minishift-{{ minishift_latest }}-linux-amd64.tgz"
@@ -157,7 +162,7 @@ binaries_packages:
   - { url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64", path: "{{ binaries_path }}/minikube"}
 
 #Versions
-apachedirectory_latest: "2.0.0.v20200411-M15"
+apachedirectory_latest: "2.0.0.v20210717-M17"
 atom_latest: "v1.54.0"
 dockermachine_latest: "0.16.2"
 glow_latest: "1.4.0"
@@ -166,4 +171,3 @@ minishift_latest: "1.34.2"
 openshift_latest: "3.11.0"
 simplenote_latest: "1.17.0"
 ulauncher_latest: "5.11.0"
-#virtualbox_latest: "6.1"
