@@ -1,0 +1,40 @@
+---
+- hosts: all
+  remote_user: yago
+  become: yes
+  become_method: su
+  become_flags: "-"
+  vars_files:
+    - ./graphical/vars/gnome.yml 
+    - ./graphical/vars/xfce.yml 
+    - ./compute/vars/vars-packages.yml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+  - name: Remove Graphical packages
+    apt:
+      name: "{{ item }}"
+      update_cache: yes
+      state: absent
+    loop:
+    - "{{ gnome_packages }}"
+    - "{{ xfce_packages }}"
+
+  - name: Remove Packages
+    package:
+      name: "{{ packages }}"
+      state: absent
+       
+  - name: Remove Funny Packages :D
+    package:
+      name: "{{ funny_packages }}"
+      state: absent
+
+  - name: Auto remove
+    apt:
+      autoremove: yes
+
+  - name: Auto clean
+    apt:
+      autoclean: yes
