@@ -10,6 +10,8 @@ linux_distribution: Debian
 
 # Ensure linux repository
 # Currently using Debian Unstable repository
+regexp_repository: 'deb\s+http://deb.debian.org/debian/\s+.*'
+linux_repository: "deb http://deb.debian.org/debian/ unstable main contrib non-free"
 ensure_linux_repository: true
 
 # Remove current gnome (default Debian graphical environment) and other dependents packages
@@ -26,12 +28,9 @@ remove_graphical_packages:
   - simple-scan
   - sleuthkit
   - speech-dispatcher
+  - xfce4*
 
-# Enable gnome minimal installation
-enable_gnome_minimal: false
+# Enable graphical minimal installation and configuration
+# Gnome configurations is just packages installations
+enable_graphical_configuration: true 
 
-# Enable xfce minimal installation
-enable_xfce_minimal: true
-
-# Enable style configuration on xfce
-enable_xfce_configuration: true
