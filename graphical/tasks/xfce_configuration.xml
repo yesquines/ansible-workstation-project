@@ -1,3 +1,11 @@
+- name: Install XFCE Minimal
+  apt:
+    name: "{{ xfce_packages }}"
+    state: present
+    update_cache: yes
+    install_recommends: no
+  when: enable_xfce_minimal
+
 - name: Ensure Themes
   block:
     - name: Ensure Themes - tar.gz
@@ -10,12 +18,12 @@
         update_cache: yes
         state: present
 
-- name: Copy Backgroung Image
+- name: XFCE - Copy Backgroung Image
   copy: 
     src: bg_black.jpg
     dest: /usr/share/images/desktop-base/
       
-- name: Configure XFCE
+- name: XFCE - Configure
   block:
     - name: Configure XFCE - directory
       file: 
@@ -49,13 +57,13 @@
         owner: "{{ username }}"
         group: "{{ username }}"
       loop:
-      - xfce4-appfinder.xml
-      - xfce4-desktop.xml
-      - xfce4-keyboard-shortcuts.xml
-      - xfce4-panel.xml
-      - xfce4-screensaver.xml
-      - xfce4-settings-editor.xml
-      - xfce4-settings-manager.xml
-      - xfwm4.xml
-      - xsettings.xml
+      - xfce/xfce4-appfinder.xml
+      - xfce/xfce4-desktop.xml
+      - xfce/xfce4-keyboard-shortcuts.xml
+      - xfce/xfce4-panel.xml
+      - xfce/xfce4-screensaver.xml
+      - xfce/xfce4-settings-editor.xml
+      - xfce/xfce4-settings-manager.xml
+      - xfce/xfwm4.xml
+      - xfce/xsettings.xml
 

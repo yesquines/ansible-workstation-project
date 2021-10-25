@@ -1,0 +1,32 @@
+xfce_packages:
+  - dconf-cli
+  - dconf-gsettings-backend
+  - evince
+  - firefox
+  - firefox-l10n-pt-br
+  - firefox-l10n-pt-br
+  - gdm3
+  - gedit
+  - gnome-calculator
+  - gnome-sushi
+  - nautilus
+  - network-manager-gnome
+  - pavucontrol
+  - pulseaudio
+  - rsync
+  - sound-theme-freedesktop
+  - system-config-printer-common
+  - system-config-printer-udev
+  - totem
+  - xfce4
+  - xfce4-battery-plugin
+  - xfce4-notifyd
+  - xfce4-places-plugin
+  - xfce4-screensaver
+  - xfce4-terminal
+  - xfce4-whiskermenu-plugin
+  - zenity
+
+webBrowser_default: firefox
+fileManager_default: nautilus
+
