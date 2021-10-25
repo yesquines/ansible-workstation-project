@@ -16,13 +16,25 @@
       when: remove_current_graphical
   tags: remove_graphical
 
+- name: Ensure Default "{{ ansible_distribution }}" Repository
+  lineinfile:
+    path: /etc/apt/sources.list
+    regexp: "{{ regexp_repository }}"
+    line: "{{ linux_repository }}"
+    state: present
+  when: ensure_linux_repository
+
 - name: Graphical Configuration
   block:
-    - name: Graphical - Include Vars
-      include_vars: vars-graphical.yml
-    - name: Graphical Install
-      include: graphical_install.yml
-    - name: Graphical Configuration
-      include: graphical_configuration.yml 
-      when: enable_xfce_configuration
-  tags: graphical
+    - name: "{{ graphical_environment | upper }}" - Include Vars
+      include_vars: "{{ graphical_environment }}.yml"
+    - name: Graphical Install and Configuration
+      include: "{{ graphical_environment }}_configuration.yml"
+      when: enable_graphical_configuration
+
+- name: Ensure GDM3 Started
+  systemd:
+    name: gdm3
+    enabled: yes
+    state: started
+  when: enable_graphical_configuration
