@@ -7,6 +7,7 @@
   vars_files:
     - ./graphical/vars/gnome.yml 
     - ./graphical/vars/xfce.yml 
+    - ./graphical/vars/cinnamon.yml 
     - ./compute/vars/vars-packages.yml
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -21,6 +22,7 @@
     loop:
     - "{{ gnome_packages }}"
     - "{{ xfce_packages }}"
+    - "{{ cinnamon_packages }}"
 
   - name: Remove Packages
     package:
