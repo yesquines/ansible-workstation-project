@@ -13,3 +13,4 @@
 - name: Clean Cache Packages
   apt:
     autoclean: yes
+  when: remove_packages

@@ -1,9 +1,9 @@
-DIRETORIES:
+diretories:
   - {path: "/root/.ssh/", mode: '750', owner: root, group: root }
   - {path: "/home/{{ username }}/.mozilla/firefox", mode: '775', owner: "{{ username }}", group: "{{ username }}" }
 
 #Get Tilix Configuration run 'dconf dump /com/gexperts/Tilix/ > tilix.dconf'
-TILIX_CONFIGURATION_ROOT:
+tilix_configuration_root:
   - {key: "/com/gexperts/Tilix/new-window-inherit-state", value: "true" }
   - {key: "/com/gexperts/Tilix/prompt-on-close", value: "true" }
   - {key: "/com/gexperts/Tilix/window-style", value: "'normal'" }
@@ -30,8 +30,8 @@ TILIX_CONFIGURATION_ROOT:
   - {key: "/com/gexperts/Tilix/control-click-titlebar", value: "false" }
   - {key: "/com/gexperts/Tilix/terminal-title-show-when-single", value: "true" }
 
-TILIX_PROFILE: "2b7c4080-0ddd-46c5-8f23-563fd3ba789d" #Get the profile run `dconf list /com/gexperts/Tilix/profiles/`
-TILIX_CONFIGURATION_PROFILE:
+tilix_profile: "2b7c4080-0ddd-46c5-8f23-563fd3ba789d" #Get the profile run `dconf list /com/gexperts/Tilix/profiles/`
+tilix_configuration_profile:
   - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/dim-transparency-percent", value: "0"}
   - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/foreground-color", value: "'#FFFFFFFFFFFF'"}
   - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/rewrap-on-resize", value: "true"}
@@ -59,7 +59,7 @@ TILIX_CONFIGURATION_PROFILE:
   - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-text", value: "''"}
   - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scrollback-lines", value: "10000"}
 
-TILIX_CONFIGURATION_KEYBINDINGS:
+tilix_configuration_keybindings:
   - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-8", value: "'disabled'"}
   - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-9", value: "'disabled'"}
   - {key: "/com/gexperts/Tilix/keybindings/session-synchronize-input", value: "'<Primary><Alt>s'"}
@@ -87,30 +87,32 @@ TILIX_CONFIGURATION_KEYBINDINGS:
   - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-7", value: "'disabled'"}
   - {key: "/com/gexperts/Tilix/keybindings/win-switch-to-session-0", value: "'<Alt>0'"}
 
-ATOM_PLUGINS:
+atom_plugins:
   - language-markdown
   - markdown-preview-plus
   - markdown-writer
   - pdf-view
 
-BASHRC_CONFIG:
-  - {regex: '^#?\s+?(HISTCONTROL).*',line: 'HISTCONTROL=ignoreboth'}
-  - {regex: '^#?\s+?(HISTSIZE).*',line: 'HISTSIZE=1000'}
-  - {regex: '^#?\s+?(HISTFILESIZE).*',line: 'HISTFILESIZE=2000'}
-  - {regex: '^#?\s+?(PROMPT_DIRTRIM).*',line: 'PROMPT_DIRTRIM=2'}
-  - {regex: '^#?\s+?(alias)\s(ls).*', line: 'alias ls="ls --color=auto"'}
-  - {regex: '^#?\s+?(alias)\s(grep).*', line: 'alias grep="grep --color=auto"'}
-  - {regex: '^#?\s+?(alias)\s(fgrep).*', line: 'alias fgrep="fgrep --color=auto"'}
-  - {regex: '^#?\s+?(alias)\s(egrep).*', line: 'alias egrep="egrep --color=auto"'}
-  - {regex: '.*(histappend)$', line: 'shopt -s histappend'}
-  - {regex: '.*(checkwinsize)$', line: 'shopt -s checkwinsize'}
-  - {regex: '.*(terraform)$', line: 'complete -C /usr/bin/terraform terraform'}
-  - {regex: '.*(packer)$', line: 'complete -C /usr/bin/packer packer'}
+bashrc_config:
+- global_Variables:
+  - 'HISTCONTROL=ignoreboth'
+  - 'HISTSIZE=1000'
+  - 'HISTFILESIZE=2000'
+  - 'PROMPT_DIRTRIM=2'
+  - 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "'}
+- alias:
+  - 'alias ls="ls --color=auto"'
+  - 'alias grep="grep --color=auto"'
+  - 'alias fgrep="fgrep --color=auto"'
+  - 'alias egrep="egrep --color=auto"'
+  - 'alias passrandom="strings /dev/urandom | grep -o '[[:alnum:]]' | head -n20 | tr -d '\n' ; echo"'
+- commands:
+  - 'shopt -s histappend'
+  - 'shopt -s checkwinsize'
+  - 'complete -C /usr/bin/terraform terraform'
+  - 'complete -C /usr/bin/packer packer'
 
-BASHRC_PS1_ROOT:
+bashrc_config_root:
   - {regex: '^#?\s+?(TMOUT).*', line: 'TMOUT=300'}
   - {regex: '^#?\s+?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
-
-BASHRC_PS1_USER:
-  - {regex: '^#?\s+?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "'}
 
