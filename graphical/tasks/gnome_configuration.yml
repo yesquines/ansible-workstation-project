@@ -1,0 +1,6 @@
+- name: Install Gnome Minimal
+  apt:
+    name: "{{ gnome_packages }}"
+    update_cache: yes
+    state: present
+  when: enable_gnome_minimal

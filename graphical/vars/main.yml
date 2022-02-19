@@ -1,0 +1,13 @@
+---
+# vars-graphical file for graphical
+theme_file: Matcha-azul.tar.gz
+
+themes_packages:
+  - papirus-icon-theme
+  - oxygencursors
+
+theme_name: Matcha-azul
+icon_theme_name: Papirus-Dark
+cursor_theme_name: oxy-zion
+background_image: bg_black.jpg
+
