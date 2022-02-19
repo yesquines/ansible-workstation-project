@@ -67,7 +67,7 @@
 
 - name: Install NPM Package
   npm:
-    name: taskbook
+    name: "{{ npm_packages }}"
     global: yes
   when: install_packages
 
@@ -91,25 +91,25 @@
         label: "{{ item.path }}"
   when: install_packages
 
-- name: Install Compress Binaries
-  block:
-    - name: Descompress Binaries
-      unarchive: 
-        src: "{{ item }}"
-        dest: /tmp/
-        exclude: ['kubectl','LICENSE','README.md','README.adoc'] #Need include other files if necessary
-        mode: 0755
-        list_files: yes
-        remote_src: yes
-      loop: "{{ compress_binaries }}"
-      register: decompress
-    - name: Copy Binaries to "{{ binaries_path }}"
-      copy:
-        src: "/tmp/{{ item }}"
-        dest: "{{ binaries_path }}"
-        remote_src: yes
-      loop: "{{ decompress | json_query('results[*].files[0]') }}"
-  when: install_packages
+#- name: Install Compress Binaries
+#  block:
+#    - name: Descompress Binaries
+#      unarchive: 
+#        src: "{{ item }}"
+#        dest: /tmp/
+#        exclude: ['kubectl','LICENSE','README.md','README.adoc'] #Need include other files if necessary
+#        mode: 0755
+#        list_files: yes
+#        remote_src: yes
+#      loop: "{{ compress_binaries }}"
+#      register: decompress
+#    - name: Copy Binaries to "{{ binaries_path }}"
+#      copy:
+#        src: "/tmp/{{ item }}"
+#        dest: "{{ binaries_path }}"
+#        remote_src: yes
+#      loop: "{{ decompress | json_query('results[*].files[0]') }}"
+#  when: install_packages
 
 - name: Install Binaries Packages
   get_url:

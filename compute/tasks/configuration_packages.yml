@@ -5,7 +5,7 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     state: directory
-  loop: "{{ DIRETORIES }}"
+  loop: "{{ diretories }}"
   loop_control:
     label: "{{ item.path }}"
   
@@ -18,16 +18,6 @@
     owner: root
     group: root
   when: enable_vim_configuration
-
-# EXCLUIR
-- name: SSH Configuration (User Config File)
-  copy:
-    src: "{{ role_path }}/files/ssh/config"
-    dest: "/root/.ssh/config"
-    mode: '600'
-    owner: root
-    group: root
-  when: enable_ssh_config_configuration
 
 - name: Tilix Configuration - Default Terminal
   alternatives:
@@ -42,7 +32,7 @@
         key: "{{ item.key }}"
         value: "{{ item.value }}"
         state: present
-      loop: "{{ TILIX_CONFIGURATION_ROOT }}"
+      loop: "{{ tilix_configuration_root }}"
       loop_control:
         label: "{{ item.key }}"
     - name: Tilix Configuration - PROFILE
@@ -50,7 +40,7 @@
         key: "{{ item.key }}"
         value: "{{ item.value }}"
         state: present
-      loop: "{{ TILIX_CONFIGURATION_PROFILE }}"
+      loop: "{{ tilix_configuration_profile }}"
       loop_control:
         label: "{{ item.key }}"
     - name: Tilix Configuration - KEYBINDINGS
@@ -58,7 +48,7 @@
         key: "{{ item.key }}"
         value: "{{ item.value }}"
         state: present
-      loop: "{{ TILIX_CONFIGURATION_KEYBINDINGS }}"
+      loop: "{{ tilix_configuration_keybindings }}"
       loop_control:
         label: "{{ item.key }}"
   become: yes
@@ -71,7 +61,7 @@
       stat:
         path: "/home/{{ username }}/.atom/packages/{{ item }}"
       register: check_atom_plugins
-      loop: "{{ ATOM_PLUGINS }}"
+      loop: "{{ atom_plugins }}"
     - name: Atom Configuration - Install Plugins
       shell: "apm install {{ item.0 }}"
       when: item.1 == False
