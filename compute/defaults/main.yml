@@ -6,7 +6,7 @@
 linux_distribution: Debian
 
 # Enable amd64 and i386 Architectur
-enable_i386: true
+enable_i386: false
 
 # Add Repositories and keys defined in vars/vars-install
 add_repo_and_keys: true
