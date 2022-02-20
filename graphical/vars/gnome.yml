@@ -33,8 +33,8 @@ gnome_packages:
   - gstreamer1.0-plugins-base
   - gstreamer1.0-plugins-good
   - gstreamer1.0-pulseaudio
+  - gvfs
   - gvfs-backends
-  - gvfs-bin
   - gvfs-fuse
   - libcanberra-pulse
   - libproxy1-plugin-gsettings
