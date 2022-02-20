@@ -4,19 +4,6 @@
     state: present
     update_cache: yes
     install_recommends: no
-  when: enable_xfce_minimal
-
-- name: Ensure Themes
-  block:
-    - name: Ensure Themes - tar.gz
-      unarchive:
-        src: "{{ theme_file }}"
-        dest: /usr/share/themes/
-    - name: Ensure Themes - apt
-      apt:
-        name: "{{ themes_packages }}"
-        update_cache: yes
-        state: present
 
 - name: XFCE - Copy Backgroung Image
   copy: 

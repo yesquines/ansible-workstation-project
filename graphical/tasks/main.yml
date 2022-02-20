@@ -24,9 +24,27 @@
     state: present
   when: ensure_linux_repository
 
+- name: Ensure Dist-Upgrade
+  apt:
+    update_cache: yes
+    upgrade: dist
+  when: ensure_linux_repository
+
+- name: Ensure Themes
+  block:
+    - name: Ensure Themes - tar.gz
+      unarchive:
+        src: "{{ theme_file }}"
+        dest: /usr/share/themes/
+    - name: Ensure Themes - apt
+      apt:
+        name: "{{ themes_packages }}"
+        update_cache: yes
+        state: present
+
 - name: Graphical Configuration
   block:
-    - name: "{{ graphical_environment | upper }}" - Include Vars
+    - name: "{{ graphical_environment | upper }} - Include Vars"
       include_vars: "{{ graphical_environment }}.yml"
     - name: Graphical Install and Configuration
       include: "{{ graphical_environment }}_configuration.yml"
