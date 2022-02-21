@@ -32,32 +32,32 @@ tilix_configuration_root:
 
 tilix_profile: "2b7c4080-0ddd-46c5-8f23-563fd3ba789d" #Get the profile run `dconf list /com/gexperts/Tilix/profiles/`
 tilix_configuration_profile:
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/dim-transparency-percent", value: "0"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/foreground-color", value: "'#FFFFFFFFFFFF'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/rewrap-on-resize", value: "true"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/use-system-font", value: "true"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/login-shell", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/palette", value: "['#000000', '#EFEF29292929', '#00AA00', '#AA5400', '#0000AA', '#AA0    0AA', '#00AAAA', '#AAAAAA', '#555557575353', '#FF5454', '#54FF54', '#FFFF54    ', '#5454FF', '#FF54FF', '#54FFFF', '#FFFFFF']" }
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/bold-is-bright", value: "true"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/visible-name", value: "'Padrão'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-color-set", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/default-size-columns", value: "100"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/default-size-rows", value: "35"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/cursor-shape", value: "'block'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/cursor-colors-set", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/highlight-colors-set", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-position", value: "'northeast'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/bold-color-set", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/font", value: "'Courier 10 Pitch Bold 12'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/use-theme-colors", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scrollback-unlimited", value: "true"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scroll-on-output", value: "false"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/notify-silence-threshold", value: "0"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/cursor-blink-mode", value: "'system'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/background-color", value: "'#000000000000'"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/background-transparency-percent", value: "6"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/badge-text", value: "''"}
-  - {key: "/com/gexperts/Tilix/profiles/{{ TILIX_PROFILE }}/scrollback-lines", value: "10000"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/dim-transparency-percent", value: "0"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/foreground-color", value: "'#FFFFFFFFFFFF'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/rewrap-on-resize", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/use-system-font", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/login-shell", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/palette", value: "['#000000', '#EFEF29292929', '#00AA00', '#AA5400', '#0000AA', '#AA0    0AA', '#00AAAA', '#AAAAAA', '#555557575353', '#FF5454', '#54FF54', '#FFFF54    ', '#5454FF', '#FF54FF', '#54FFFF', '#FFFFFF']" }
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/bold-is-bright", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/visible-name", value: "'Padrão'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/badge-color-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/default-size-columns", value: "100"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/default-size-rows", value: "35"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/cursor-shape", value: "'block'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/cursor-colors-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/highlight-colors-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/badge-position", value: "'northeast'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/bold-color-set", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/font", value: "'Courier 10 Pitch Bold 12'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/use-theme-colors", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/scrollback-unlimited", value: "true"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/scroll-on-output", value: "false"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/notify-silence-threshold", value: "0"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/cursor-blink-mode", value: "'system'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/background-color", value: "'#000000000000'"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/background-transparency-percent", value: "6"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/badge-text", value: "''"}
+  - {key: "/com/gexperts/Tilix/profiles/{{ tilix_profile }}/scrollback-lines", value: "10000"}
 
 tilix_configuration_keybindings:
   - {key: "/com/gexperts/Tilix/keybindings/session-switch-to-terminal-8", value: "'disabled'"}
@@ -94,25 +94,30 @@ atom_plugins:
   - pdf-view
 
 bashrc_config:
-- global_Variables:
-  - 'HISTCONTROL=ignoreboth'
-  - 'HISTSIZE=1000'
-  - 'HISTFILESIZE=2000'
-  - 'PROMPT_DIRTRIM=2'
-  - 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "'}
-- alias:
-  - 'alias ls="ls --color=auto"'
-  - 'alias grep="grep --color=auto"'
-  - 'alias fgrep="fgrep --color=auto"'
-  - 'alias egrep="egrep --color=auto"'
-  - 'alias passrandom="strings /dev/urandom | grep -o '[[:alnum:]]' | head -n20 | tr -d '\n' ; echo"'
-- commands:
-  - 'shopt -s histappend'
-  - 'shopt -s checkwinsize'
-  - 'complete -C /usr/bin/terraform terraform'
-  - 'complete -C /usr/bin/packer packer'
+  alias:
+    - 'alias ls="ls --color=auto"'
+    - 'alias grep="grep --color=auto"'
+    - 'alias fgrep="fgrep --color=auto"'
+    - 'alias egrep="egrep --color=auto"'
+    - 'alias passrandom="strings /dev/urandom | grep -o [[:alnum:]] | head -n20 | tr -d "\n" ; echo"'
+    - 'alias ll="ls -alF"'
+    - 'alias la="ls -A"'
+    - 'alias l="ls -CF"'
+  global_variables:
+    - 'EDITOR=vim'
+    - 'HISTCONTROL=ignoreboth'
+    - 'HISTFILESIZE=2000'
+    - 'HISTSIZE=2000'
+    - 'HISTTIMEFORMAT="%F-%T "'
+    - 'PROMPT_DIRTRIM=2'
+    - 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]\`__git_ps1\`]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "'
+  commands:
+    - 'shopt -s histappend'
+    - 'shopt -s checkwinsize'
+    - 'complete -C /usr/bin/terraform terraform'
+    - 'complete -C /usr/bin/packer packer'
 
 bashrc_config_root:
   - {regex: '^#?\s+?(TMOUT).*', line: 'TMOUT=300'}
-  - {regex: '^#?\s+?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
+  - {regex: '^#?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]`__git_ps1`]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
 

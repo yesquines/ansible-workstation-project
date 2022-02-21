@@ -62,12 +62,15 @@
         path: "/home/{{ username }}/.atom/packages/{{ item }}"
       register: check_atom_plugins
       loop: "{{ atom_plugins }}"
+    - set_fact:
+        check_atom_plugins: '{{ {"results": []} }}'
+      when: check_atom_plugins.skipped is defined
     - name: Atom Configuration - Install Plugins
       shell: "apm install {{ item.0 }}"
       when: item.1 == False
       with_together: 
-      - "{{ check_atom_plugins | json_query('results[*].item') }}"
-      - "{{ check_atom_plugins | json_query('results[*].stat.exists') }}"
+      - "{{ check_atom_plugins | json_query('results[?*].item') }}"
+      - "{{ check_atom_plugins | json_query('results[?*].stat.exists') }}"
       loop_control:
         label: "{{ item.0 }}"
     - name: Atom Configuration - Config File
@@ -97,37 +100,35 @@
         dest: "/home/{{ username }}/.mozilla/firefox/"
         perms: yes
         recursive: yes
+    - name: Firefox Configuration - Ensure permission 
+      file:
+        path: "/home/{{ username }}/.mozilla/firefox/"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+        state: directory
   become: yes
   become_user: "{{ username }}"
+  when: enable_firefox_configuration
 
 - name: Bashrc Configuration
   block:
     - name: Bashrc - General Configuration
-      lineinfile:
-        path: "{{ item.0 }}"
-        regexp: "{{ item.1.regex }}"
-        line: "{{ item.1.line }}"
-      with_nested: 
-      - ["/root/.bashrc","/home/{{ username }}/.bashrc"] 
-      - "{{ BASHRC_CONFIG }}"
-      loop_control:
-        label: "{{ item.0 }} | {{ item.1.line }}"
+      template:
+        src: bashrc.j2
+        dest: "{{ item }}"
+        backup: yes
+      loop: 
+      - /root/.bashrc
+      - /home/{{ username }}/.bashrc
     - name: Bashrc - Root Configuration
       lineinfile:
         path: /root/.bashrc 
         regexp: "{{ item.regex }}"
         line: "{{ item.line }}"
-      loop: "{{ BASHRC_PS1_ROOT }}"
+      loop: "{{ bashrc_config_root }}"
       loop_control:
         label: "{{ item.line | regex_search('TMOUT|PS1') }}"
-    - name: Bashrc - User Configuration
-      lineinfile:
-        path: "/home/{{ username }}/.bashrc"
-        regexp: "{{ item.regex }}"
-        line: "{{ item.line }}"
-      loop: "{{ BASHRC_PS1_USER }}"
-      loop_control:
-        label: "{{ item.line | regex_search('PS1') }}"
     - name: Sync Bash Completion Scripts
       synchronize:
         src: "{{ role_path }}/files/profiles/bash_completion.d"
@@ -140,7 +141,7 @@
         remote_src: yes
   when: enable_bashrc_configuration
 
-- name: Bock - Sync .desktops
+- name: Block - Sync .desktops
   block:
     - name: Sync .desktops
       synchronize:
