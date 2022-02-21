@@ -8,6 +8,7 @@
     ansible_python_interpreter: /usr/bin/python3
     graphical_environment: gnome
     configure_graphical: true
+    remove_current_graphical: false
     configure_compute: true
   roles:
     - { role: graphical, when: "configure_graphical"}
