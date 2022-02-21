@@ -99,7 +99,7 @@ bashrc_config:
     - 'alias grep="grep --color=auto"'
     - 'alias fgrep="fgrep --color=auto"'
     - 'alias egrep="egrep --color=auto"'
-    - 'alias passrandom="strings /dev/urandom | grep -o [[:alnum:]] | head -n20 | tr -d "\n" ; echo"'
+    - 'alias passrandom="strings /dev/urandom | grep -o '[[:alnum:]]' | head -n20 | tr -d '\n' ; echo"'
     - 'alias ll="ls -alF"'
     - 'alias la="ls -A"'
     - 'alias l="ls -CF"'
@@ -110,7 +110,7 @@ bashrc_config:
     - 'HISTSIZE=2000'
     - 'HISTTIMEFORMAT="%F-%T "'
     - 'PROMPT_DIRTRIM=2'
-    - 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]\`__git_ps1\`]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "'
+    - 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;36m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]\`__git_ps1\`]\`if [ \$? = 0 ]; then echo \[\e[32m\]🙂\[\e[0m\]; else echo \[\e[31m\]🙁\[\e[0m\]; fi\`\[\e[0m\]\[\e[01;37m\]\$\[\e[0m\] "' 
   commands:
     - 'shopt -s histappend'
     - 'shopt -s checkwinsize'
@@ -119,5 +119,5 @@ bashrc_config:
 
 bashrc_config_root:
   - {regex: '^#?\s+?(TMOUT).*', line: 'TMOUT=300'}
-  - {regex: '^#?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]`__git_ps1`]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]☺ \[\e[0m\]; else echo \[\e[31m\]☹ \[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
+  - {regex: '^#?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]\`__git_ps1\`]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]🙂\[\e[0m\]; else echo \[\e[31m\]🙁\[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
 
