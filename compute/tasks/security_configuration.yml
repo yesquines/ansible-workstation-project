@@ -77,7 +77,7 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
-  loop: "{{ IMPORTANTS_FILES }}"
+  loop: "{{ importants_files }}"
   loop_control:
     label: "{{ item.path }}"
 
@@ -96,12 +96,12 @@
       path: /etc/modprobe.d/unused-filesystems.conf
       create: yes
       line: "install {{ item }} /bin/true"
-    loop: "{{ UNUSED_FILESYSTEMS }}"
+    loop: "{{ unused_filesystems }}"
   - name: Disable unused filesystems
     modprobe:
       name: "{{ item }}"
       state: absent
-    loop: "{{ UNUSED_FILESYSTEMS }}"
+    loop: "{{ unused_filesystems }}"
 
 - name: Disable Uncommon Network Protocols
   block:
@@ -110,12 +110,12 @@
       path: /etc/modprobe.d/uncommon_network_protocols.conf
       create: yes
       line: "install {{ item }} /bin/true"
-    loop: "{{ UNCOMMON_PROTOCOLS }}"
+    loop: "{{ uncommon_protocols }}"
   - name: Disable unused filesystems
     modprobe:
       name: "{{ item }}"
       state: absent
-    loop: "{{ UNCOMMON_PROTOCOLS }}"
+    loop: "{{ uncommon_protocols }}"
 
 - name: SYSCTL - Configure Kernel parameters 
   sysctl:

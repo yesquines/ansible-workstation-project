@@ -9,10 +9,10 @@ sshd_strict_modes: 'yes'
 sshd_syslog_facility: 'AUTH'
 sshd_log_level: 'VERBOSE'
 ssh_login_grace_time: 60s
-ssh_max_auth_retries: 3
+ssh_max_auth_retries: 5
 ssh_max_sessions: 3
 ssh_max_startups: '10:30:100'
-sshd_authenticationmethods: 'publickey,password'
+sshd_authenticationmethods: 'password,publickey'
 ssh_server_password_login: 'yes'
 ssh_challengeresponseauthentication: 'no'
 ssh_client_alive_interval: 600
@@ -48,7 +48,7 @@ logindefs_retries: '5'
 logindefs_timeout: '60'
 logindefs_homeless: 'no'
 
-IMPORTANTS_FILES:
+importants_files:
   - {path: /etc/shadow, owner: root, group: shadow, mode: '0640' }
   - {path: /etc/passwd, owner: root, group: root, mode: '0644' }
   - {path: /etc/group, owner: root, group: root, mode: '0644' }
@@ -56,7 +56,7 @@ IMPORTANTS_FILES:
 
 mount_proc_options: 'rw,nosuid,nodev,noexec,relatime,hidepid=2'
 
-UNUSED_FILESYSTEMS:
+unused_filesystems:
   - "cramfs"
   - "freevxfs"
   - "jffs2"
@@ -64,13 +64,12 @@ UNUSED_FILESYSTEMS:
   - "hfsplus"
   - "squashfs"
   - "udf"
-  - "vfat"
   - "dccp"  
   - "rds"  
   - "sctp"
   - "tipc" 
 
-UNCOMMON_PROTOCOLS:
+uncommon_protocols:
   - "dccp"
   - "sctp"
   - "rds"
@@ -81,48 +80,46 @@ sysctl_config:
   fs.protected_symlinks: 1
   fs.suid_dumpable: 0
   kernel.core_uses_pid: 1
-  kernel.kptr_restrict: 2
   kernel.kexec_load_disabled: 1
-  kernel.sysrq: 0
+  kernel.kptr_restrict: 2
   kernel.randomize_va_space: 2
+  kernel.sysrq: 0
   kernel.yama.ptrace_scope: 1
+  net.ipv4.conf.all.accept_redirects: 0
+  net.ipv4.conf.all.accept_source_route: 0
+  net.ipv4.conf.all.arp_announce: 2
+  net.ipv4.conf.all.arp_ignore: 1
+  net.ipv4.conf.all.log_martians: 1
   net.ipv4.conf.all.rp_filter: 1
+  net.ipv4.conf.all.secure_redirects: 0
+  net.ipv4.conf.all.send_redirects: 0
+  net.ipv4.conf.all.shared_media: 1
+  net.ipv4.conf.default.accept_redirects: 0
+  net.ipv4.conf.default.accept_source_route: 0
+  net.ipv4.conf.default.log_martians: 1
   net.ipv4.conf.default.rp_filter: 1
+  net.ipv4.conf.default.secure_redirects: 0
+  net.ipv4.conf.default.send_redirects: 0
+  net.ipv4.conf.default.shared_media: 1
   net.ipv4.icmp_echo_ignore_broadcasts: 1
   net.ipv4.icmp_ignore_bogus_error_responses: 1
   net.ipv4.icmp_ratelimit: 100
   net.ipv4.icmp_ratemask: 88089
-  net.ipv4.tcp_timestamps: 0
-  net.ipv4.conf.all.arp_ignore: 1
-  net.ipv4.conf.all.arp_announce: 2
   net.ipv4.tcp_rfc1337: 1
-  net.ipv4.conf.all.shared_media: 1
-  net.ipv4.conf.default.shared_media: 1
-  net.ipv4.conf.all.accept_source_route: 0
-  net.ipv4.conf.default.accept_source_route: 0
-  net.ipv4.conf.all.send_redirects: 0
-  net.ipv4.conf.default.send_redirects: 0
-  net.ipv4.conf.all.log_martians: 1
-  net.ipv4.conf.default.log_martians: 1
-  net.ipv4.conf.all.log_martians: 1
-  net.ipv4.conf.default.log_martians: 1
-  net.ipv4.conf.default.accept_redirects: 0
-  net.ipv4.conf.all.accept_redirects: 0
-  net.ipv4.conf.all.secure_redirects: 0
-  net.ipv4.conf.default.secure_redirects: 0
-  net.ipv6.conf.default.accept_redirects: 0
+  net.ipv4.tcp_timestamps: 0
+  net.ipv6.conf.all.accept_ra: 0
   net.ipv6.conf.all.accept_redirects: 0
   net.ipv6.conf.all.disable_ipv6: 1
   net.ipv6.conf.all.forwarding: 0
-  net.ipv6.conf.all.accept_ra: 0
   net.ipv6.conf.default.accept_ra: 0
-  net.ipv6.conf.default.router_solicitations: 0
-  net.ipv6.conf.default.accept_ra_rtr_pref: 0
-  net.ipv6.conf.default.accept_ra_pinfo: 0
   net.ipv6.conf.default.accept_ra_defrtr: 0
+  net.ipv6.conf.default.accept_ra_pinfo: 0
+  net.ipv6.conf.default.accept_ra_rtr_pref: 0
+  net.ipv6.conf.default.accept_redirects: 0
   net.ipv6.conf.default.autoconf: 0
   net.ipv6.conf.default.dad_transmits: 0
   net.ipv6.conf.default.max_addresses: 1
+  net.ipv6.conf.default.router_solicitations: 0
   vm.mmap_min_addr: 65536
   vm.mmap_rnd_bits: 32
   vm.mmap_rnd_compat_bits: 16
