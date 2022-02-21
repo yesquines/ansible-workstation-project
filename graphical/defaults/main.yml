@@ -31,6 +31,13 @@ remove_graphical_packages:
   - xfce4*
 
 # Enable graphical minimal installation and configuration
-# Gnome configurations is just packages installations
 enable_graphical_configuration: true 
+
+# Define de Graphical Environment (cinnamon, gnome and xfce)
+# Cinnamon and Gnome is just package installations 
+# XFCE has some configurations bases on some configurations files
+graphical_environment: gnome
+
+# gnome vars
+enable_gnome_extensions: true
 

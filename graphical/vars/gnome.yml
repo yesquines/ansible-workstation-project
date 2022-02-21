@@ -10,7 +10,7 @@ gnome_packages:
   - evince
   - firefox
   - firefox-l10n-pt-br
-  - fonts-cantarell
+  - fonts-dejavu
   - gdm3
   - gedit
   - gkbd-capplet
@@ -46,3 +46,10 @@ gnome_packages:
   - system-config-printer-udev
   - totem
   - zenity
+
+gnome_extensions:
+  - gnome-shell-extension-dash-to-panel
+  - gnome-shell-extension-prefs
+  - gnome-shell-extension-sound-device-chooser
+  - gnome-shell-extension-top-icons-plus
+  - gnome-shell-extensions

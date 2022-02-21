@@ -1,5 +1,16 @@
-- name: Install Gnome Minimal
+- name: GNOME - Copy Backgroung Image
+  copy: 
+    src: bg_black.jpg
+    dest: /usr/share/images/desktop-base/
+
+- name: GNOME - Install Gnome Minimal
   apt:
     name: "{{ gnome_packages }}"
     update_cache: yes
     state: present
+
+- name: GNOME - Install Gnome-Shell-Extensions
+  apt:
+    name: "{{ gnome_extensions }}"
+    state: present
+  when: enable_gnome_extensions
