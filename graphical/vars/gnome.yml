@@ -3,6 +3,7 @@ gnome_packages:
   - baobab
   - caribou
   - dconf-cli
+  - dconf-editor
   - dconf-gsettings-backend
   - eog
   - ethtool
