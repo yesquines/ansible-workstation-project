@@ -20,12 +20,10 @@ username: yago
 # Enable VIM Configuration defined in files/vim/vimrc
 enable_vim_configuration: true
 
-# Enable .ssh/config Configuration defined in files/ssh/config
-enable_ssh_config_configuration: false
-
 # Enable Packages configurations defined in vars/vars-configuration
 enable_tilix_configuration: true
 enable_atom_install_plugins: true
+enable_firefox_configuration: true
 enable_bashrc_configuration: true #And sync Bash Completion files defined in files/profiles/bash_completion.d/
 
 # Enable sync .desktop files defined in files/desktop-files/
