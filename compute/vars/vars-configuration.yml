@@ -114,10 +114,18 @@ bashrc_config:
   commands:
     - 'shopt -s histappend'
     - 'shopt -s checkwinsize'
-    - 'complete -C /usr/bin/terraform terraform'
-    - 'complete -C /usr/bin/packer packer'
+    - 'complete -C $(which terraform) terraform'
+    - 'complete -C $(which packer) packer'
 
 bashrc_config_root:
   - {regex: '^#?\s+?(TMOUT).*', line: 'TMOUT=300'}
   - {regex: '^#?(PS1).*', line: 'PS1="\[\e[01;30m\][\[\e[0m\]\[\e[01;31m\]\u\[\e[0m\]\[\e[01;37m\]·\[\e[0m\]\[\e[01;04;30m\]\h\[\e[0m\]\[\e[01;37m\] » \[\e[0m\]\[\e[01;34m\]\w\[\e[0m\]\[\e[01;30m\]\`__git_ps1\`]\[\e[0m\]\`if [ \$? = 0 ]; then echo \[\e[32m\]🙂\[\e[0m\]; else echo \[\e[31m\]🙁\[\e[0m\]; fi\`\[\e[01;37m\]\\$\[\e[0m\] "'}
 
+systemd_disable_units:
+  - privoxy 
+  - tor 
+  - cups-browsed 
+  - nfs-server 
+  - bluetooth 
+  - docker
+  - rpcbind

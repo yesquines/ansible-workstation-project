@@ -155,3 +155,9 @@
         remote_src: yes
   when: enable_desktop_files_configuration
  
+- name: Stop and disable some programs
+  systemd:
+    name: "{{ systemd_disable_units }}"
+    enabled: no
+    state: stopped
+
