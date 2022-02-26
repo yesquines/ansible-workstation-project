@@ -78,6 +78,7 @@ packages:
   - audacity
   - awscli
   - dbeaver-ce
+  - dkms
   - docker-compose
   - docker.io
   - filezilla
