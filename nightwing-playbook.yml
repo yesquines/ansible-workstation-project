@@ -1,11 +1,9 @@
 ---
 - hosts: all
-  remote_user: yago
+  remote_user: "{{ username }}"
   become: yes
-  become_method: su
-  become_flags: "-"
   vars:
-    ansible_python_interpreter: /usr/bin/python3
+    username: yago
     graphical_environment: gnome
     configure_graphical: true
     remove_current_graphical: false
