@@ -10,6 +10,7 @@ repository:
   - { repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main", name: "kubernetes"}
   - { repo: "deb https://dbeaver.io/debs/dbeaver-ce /", name: "dbeaver"}
   - { repo: "deb https://packages.cloud.google.com/apt cloud-sdk main", name: "google-cloud"}
+  - { repo: "deb https://baltocdn.com/helm/stable/debian/ all main", name: "helm"}
 
 keys:
   - "https://apt.releases.hashicorp.com/gpg"
@@ -18,6 +19,7 @@ keys:
   - "https://download.docker.com/linux/debian/gpg"
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+  - "https://baltocdn.com/helm/signing.asc"
 
 keys_server:
   - {keyserver: keyserver.ubuntu.com, id: 93C4A3FD7BB9C367} #Ansible Key
@@ -82,14 +84,17 @@ packages:
   - docker-compose
   - docker.io
   - filezilla
+  - gedit-plugin-text-size
   - gimp
   - google-chrome-stable
   - google-cloud-sdk
+  - ipcalc
   - jmeter
   - keepassxc
   - ksnip
   - kubectl
   - libreoffice
+  - nautilus-image-converter
   - nautilus-nextcloud
   - network-manager-openconnect
   - network-manager-openconnect-gnome
@@ -164,10 +169,14 @@ remove_packages:
   - gnome-keyring-pkcs11
   - gnome-user-docs
   - gnome-user-share
-  - konqueror
-  - xinetd
   - inetd
-  - ypserv
-  - telnet-server
-  - rsh-server
+  - konqueror
+  - nfs-kernel-server
+  - plymouth
   - prelink
+  - rsh-server
+  - telnet-server
+  - totem
+  - totem-plugins
+  - xinetd
+  - ypserv
